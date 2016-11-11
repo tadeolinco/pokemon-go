@@ -12,7 +12,7 @@ CREATE TABLE user (
     team VARCHAR(10),
     level INT,
     username VARCHAR(10),
-    password VARCHAR(10),
+    password VARCHAR(12),
     CONSTRAINT user_userid_pk PRIMARY KEY(user_id)
 );
 
@@ -43,6 +43,7 @@ CREATE TABLE pokemon (
 CREATE TABLE challenges (
     user_id INT,
     gym_id INT,
-    CONSTRAINT user_userid_uk UNIQUE(user_id),
-    CONSTRAINT user_gymid_uk UNIQUE(gym_id)
+    CONSTRAINT user_id_gym_id_pk PRIMARY KEY(user_id, gym_id),
+    CONSTRAINT challenges_userid_fk FOREIGN KEY(user_id) REFERENCES user(user_id),
+    CONSTRAINT challenges_gymid_fk FOREIGN KEY(gym_id) REFERENCES gym(gym_id)
 );
