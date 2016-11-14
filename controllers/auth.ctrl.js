@@ -6,7 +6,6 @@ module.exports = (req, res, next) => {
     if (req.session && req.session.username) {
         next();
     } else {
-        res.sendFile('/views/login.html', { root: __dirname+'/../' });
+        res.sendFile('/public/login.html', { root: __dirname+'/../' });
     }
 }
-
