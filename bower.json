@@ -1,0 +1,22 @@
+{
+  "name": "pokemon-go",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "tadeolinco <tadeolinco@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/tadeolinco/pokemon-go",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "semantic": "^2.2.6"
+  }
+}
