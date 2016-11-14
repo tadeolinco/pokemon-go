@@ -6,11 +6,15 @@
   "dependencies": {
     "angular": "^1.5.8",
     "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
+    "crypto": "0.0.3",
     "express": "^4.14.0",
+    "express-session": "^1.14.2",
     "mariasql": "^0.2.6"
   },
   "devDependencies": {},
   "scripts": {
+    "postinstall": "bower install",
     "start": "concurrently -k 'watchify app/app.module.js -o public/bundle.js -v'  'nodemon app.js'"
   },
   "author": "",
