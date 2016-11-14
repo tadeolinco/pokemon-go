@@ -6,9 +6,12 @@
 2. 
     ```
     cd pokemon-go
+    ```
+3.
+    ```
     npm install
     ```
-3. 
+4. 
     ```
     npm start
     ```
