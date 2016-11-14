@@ -12,7 +12,7 @@ CREATE TABLE user (
     team VARCHAR(10),
     level INT,
     username VARCHAR(10),
-    password VARCHAR(12),
+    password VARCHAR(72),
     CONSTRAINT user_userid_pk PRIMARY KEY(user_id)
 );
 
@@ -36,14 +36,14 @@ CREATE TABLE pokemon (
     user_id INT,
     gym_id INT,
     CONSTRAINT user_pokemonid_pk PRIMARY KEY(pokemon_id),
-    CONSTRAINT user_userid_fk FOREIGN KEY(user_id) REFERENCES user(user_id),
-    CONSTRAINT user_gymid_fk FOREIGN KEY(gym_id) REFERENCES gym(gym_id)
+    CONSTRAINT user_userid_fk FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+    CONSTRAINT user_gymid_fk FOREIGN KEY(gym_id) REFERENCES gym(gym_id) ON DELETE SET NULL
 );
 
 CREATE TABLE challenges (
     user_id INT,
     gym_id INT,
     CONSTRAINT user_id_gym_id_pk PRIMARY KEY(user_id, gym_id),
-    CONSTRAINT challenges_userid_fk FOREIGN KEY(user_id) REFERENCES user(user_id),
-    CONSTRAINT challenges_gymid_fk FOREIGN KEY(gym_id) REFERENCES gym(gym_id)
+    CONSTRAINT challenges_userid_fk FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+    CONSTRAINT challenges_gymid_fk FOREIGN KEY(gym_id) REFERENCES gym(gym_id) ON DELETE CASCADE
 );
