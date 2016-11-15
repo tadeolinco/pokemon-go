@@ -4,7 +4,7 @@ const crypt = require('../crypt');
 /* [GET] ALL USERS */
 exports.getUsers = (req, res) => {
     User.findAll(users => {
-        return res.status(200).json({
+        return res.json({
             users: users,
             message: 'Successfully fetched all users'
         });
@@ -16,7 +16,7 @@ exports.getUser = (req, res) => {
     var user_id = req.params.user_id;
 
     User.findOne(user_id, user => {
-        return res.status(200).json({
+        return res.json({
             users: user,
             message: 'Successfully fetched a user'
         });
@@ -31,7 +31,7 @@ exports.registerUser = (req, res) => {
 
     User.create(user, user_id => {
         User.findOne(user_id, newUser => {
-            return res.status(201).json({
+            return res.json({
                 users: newUser,
                 message: 'Successfully registered a user'
             });
@@ -70,7 +70,7 @@ exports.updateUser = (req, res) => {
 
     User.update(user, user_id => {
         User.findOne(user_id, newUser => {
-            return res.status(200).json({
+            return res.json({
                 users: newUser,
                 message: 'Successfully updated a user'
             });
@@ -83,7 +83,7 @@ exports.deleteUser = (req, res) => {
     var user_id = req.params.user_id;
 
     User.delete(user_id, () => {
-        return res.status(204).json({
+        return res.json({
             message: 'Successfully deleted a user'
         });
     });
@@ -92,7 +92,7 @@ exports.deleteUser = (req, res) => {
 /* [DELETE] USER BY ID */
 exports.deleteUsers = (req, res) => {
     User.deleteAll(() => {
-        return res.status(204).json({
+        return res.json({
             message: 'Successfully deleted all users'
         });
     });
