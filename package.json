@@ -15,7 +15,7 @@
   "devDependencies": {},
   "scripts": {
     "postinstall": "bower install",
-    "start": "concurrently -k 'watchify app/app.module.js -o public/bundle.js -v'  'nodemon app.js'"
+    "start": "concurrently -k 'watchify app/app.module.js -o public/bundle.js -dv'  'nodemon app.js'"
   },
   "author": "",
   "license": "ISC"
