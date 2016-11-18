@@ -7,3 +7,5 @@ angular.module('app', []);
 /* DIRECTIVES */
 
 /* CONTROLLERS */
+require('./login/login.controller');
+
