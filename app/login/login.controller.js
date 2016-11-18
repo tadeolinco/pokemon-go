@@ -1,4 +1,4 @@
-module.exports = (function() {
+(function() {
     'use strict';
 
     angular
@@ -21,9 +21,16 @@ module.exports = (function() {
             $http
                 .post('/login', credentials)
                 .then(response => { // success
-                    console.log('Success in logging in user');
+                    console.log('Success in login method');
+                    var redirect = response.data.redirect;
+                    if (redirect === '/') { // if logged in
+                        window.location.href = response.data.redirect;
+                        console.log('User logged in!');
+                    } else { // if wrong credentials
+                        console.log('User did not log in!');
+                    }
                 }, response => { // error
-                    console.log('Error in logging in user');
+                    console.log('Error in login method');
                 });
 
         }
