@@ -47,9 +47,9 @@ exports.loginUser = (req, res) => {
     User.findOneByUsername(username, user => {
         if(user && password == crypt.decrypt(user.password)) {
             req.session.username = username;
-            res.sendFile('/public/index.html', { root: __dirname+'/../' });
+            res.sendFile('/views/index.html', { root: __dirname+'/../' });
         } else {
-            res.sendFile('/public/login.html', { root: __dirname+'/../' });
+            res.sendFile('/views/login.html', { root: __dirname+'/../' });
         }
     });
 }
@@ -57,7 +57,7 @@ exports.loginUser = (req, res) => {
 /* [POST] LOGS USER OUT */
 exports.logoutUser = (req, res) => {
     delete req.session.username;
-    res.sendFile('/public/login.html', { root: __dirname+'/../' });
+    res.sendFile('/views/login.html', { root: __dirname+'/../' });
 }
 
 /* [PUT] USER */
