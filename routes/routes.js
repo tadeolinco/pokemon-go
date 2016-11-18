@@ -8,10 +8,9 @@ router.post('/logout',  UserCtrl.logoutUser);
 
 /* AUTHENTICATION */
 router.use(auth);
-
 router.use('/', require('./user.route'));
 router.use('/', require('./gym.route'));
 router.use('/', require('./pokemon.route'));
 router.use('/', require('./challenges.route'));
 
-module.exports = router
+module.exports = router;
