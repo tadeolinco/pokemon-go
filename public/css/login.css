@@ -1,0 +1,17 @@
+body {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.own-center-1 {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.own-center-2 {
+    margin-left: auto;
+    margin-right: auto; 
+    width: 100%;
+}
