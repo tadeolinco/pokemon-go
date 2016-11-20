@@ -16,5 +16,7 @@ router.use('/', require('./user.route'));
 router.use('/', require('./gym.route'));
 router.use('/', require('./pokemon.route'));
 router.use('/', require('./challenges.route'));
-
+router.use('*', (req, res) => {
+    res.status(404).sendFile('/views/404.html', { root: __dirname+'/..'});
+});
 module.exports = router;
