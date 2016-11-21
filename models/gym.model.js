@@ -18,7 +18,7 @@ exports.findOne = (gym_id, cb) => {
     
 /* Posts the gym, returning its gym_id */
 exports.create = (gym, cb) => {
-    db.query('INSERT INTO gym VALUES(0, :name, :location, :number_of_users_battled, :team, :prestige)', gym, (err, rows) => {
+    db.query('INSERT INTO gym VALUES(0, :name, :country, :number_of_users_battled, :team, :prestige)', gym, (err, rows) => {
         if (err) throw err;
         return cb(db.lastInsertId());
     });
@@ -26,14 +26,7 @@ exports.create = (gym, cb) => {
 
 /* Updates gym given by gym_id */
 exports.update = (gym, cb) => {
-    var query = 'UPDATE gym SET ';
-    for (key in gym) {
-        if (key !== 'gym_id')
-            query += key + ' = :' + key + ' '
-    }
-    query += 'WHERE gym_id = :gym_id';
-
-    db.query(query, gym, (err, rows) => {
+    db.query('UPDATE gym SET name=:name, country=:country, number_of_users_battled=:number_of_users_battled, team=:team, prestige=:prestige WHERE gym_id=:gym_id', gym, (err, rows) => {
         if (err) throw err;
         return cb(gym.gym_id);
     });

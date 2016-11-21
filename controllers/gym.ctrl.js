@@ -41,12 +41,10 @@ exports.updateGym = (req, res) => {
     var gym = req.body;
     gym.gym_id = req.params.gym_id;
 
-    Gym.update(gym, gym_id => {
-        Gym.findOne(gym_id, newGym => {
-            return res.json({
-                gyms: newGym,
-                message: 'Succefully updated a gyms'
-            });
+    Gym.update(gym, newGym => {
+        return res.json({
+            gyms: newGym,
+            message: 'Succefully updated a gyms'
         });
     });
 };

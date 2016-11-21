@@ -41,12 +41,10 @@ exports.updatePokemon = (req, res) => {
     var pokemon = req.body;
     pokemon.pokemon_id = req.params.pokemon_id;
 
-    Pokemon.update(pokemon, pokemon_id => {
-        Pokemon.findOne(pokemon_id, newPokemon => {
-            return res.json({
-                pokemons: newPokemon,
-                message: 'Successfully updated a pokemon'
-            });
+    Pokemon.update(pokemon, newPokemon => {
+        return res.json({
+            pokemons: newPokemon,
+            message: 'Successfully updated a pokemon'
         });
     });
 };

@@ -68,12 +68,10 @@ exports.updateUser = (req, res) => {
         user.password = crypt.encrypt(user.password);
     }
 
-    User.update(user, user_id => {
-        User.findOne(user_id, newUser => {
-            return res.json({
-                users: newUser,
-                message: 'Successfully updated a user'
-            });
+    User.update(user, newUser => {
+        return res.json({
+            users: newUser,
+            message: 'Successfully updated a user'
         });
     });
 };
