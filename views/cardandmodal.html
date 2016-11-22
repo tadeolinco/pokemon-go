@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Card and Modal</title>
+    <link rel="stylesheet" type="text/css" href="/bower_components/semantic/dist/semantic.css">
+</head>
+<body>
+<div class = "ui grid">
+	<div class= "three wide column">
+		<div class="ui fluid special centered card">
+			<div class="blurring dimmable image">
+				<div class="ui dimmer">
+					<div class="content">
+						<div class="">
+							<div class="center">
+								<div id = "modalButton" class="ui inverted button">View/Edit</div>
+							</div>
+							<div class="center">
+								<div class="ui inverted button">Delete</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<img class="ui image fluid" src="/assets/charmander.jpg">
+			</div>
+			<div class="content">
+				<div class="header">
+					Pokemon Name/Gym Name/User name
+				</div>
+				<div class="meta">
+	   	 			Pokemon/User/Gym
+	  			</div>
+			</div>
+			<div class="extra content">
+				<i class="user icon"></i>
+					Owned by User name/Team name
+			</div>
+		</div>
+	</div>
+</div>
+	
+	<div class="ui small modal">
+		<i class="close icon"></i>
+		<div class="header">
+			Pokemon Name/User Name/Gym Name
+		</div>
+		<div class="image content">
+			<div class="ui medium image">
+				<img src="/assets/charmander.jpg">
+			</div>
+			<div class="description">
+				<div class = "ui grid ">
+					<div class = "eight wide centered column">
+						<div class="ui big list">
+							<div class="item">
+								<div class="header">Attribute</div>
+								Value
+							</div>
+							<div class="item">
+								<div class="header">Attribute</div>
+								Value
+							</div>
+							<div class="item">
+								<div class="header">Attribute</div>
+								Value
+							</div>
+							<div class="item">
+								<div class="header">Attribute</div>
+								Value
+							</div>
+							<div class="item">
+								<div class="header">Attribute</div>
+								Value
+							</div>
+							<div class="item">
+								<div class="header">Attribute</div>
+								Value
+							</div>
+							<div class="item">
+								<div class="header">Attribute</div>
+								Value
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="actions">
+			<div class="ui blue right labeled icon button">
+				Edit
+				<i class="edit icon"></i>
+			</div>
+			<div class="ui black cancel button">
+				Cancel
+			</div>
+		</div>
+	</div>
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/bower_components/semantic/dist/semantic.js"></script>
+    <script>
+		$('.special.card .image').dimmer({
+			on: 'hover'
+		});
+
+		$('.ui.modal').modal('setting',{
+			closable  : false,
+		});
+
+		$("#modalButton").click(function() {
+			$('.ui.modal').modal('show');
+		});
+    </script>
+</body>
+</html>

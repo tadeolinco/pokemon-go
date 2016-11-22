@@ -1,12 +1,10 @@
-require('angular-route');
-
 const angular = require('angular');   
 
 angular.module('app', ['ngRoute']);
 
+/* ROUTES */
+require('angular-route');
 require('./app.routes');
-
-/* CONTROLLERS */
 
 /* SERVICES */
 
