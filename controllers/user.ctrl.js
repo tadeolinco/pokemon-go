@@ -47,9 +47,9 @@ exports.loginUser = (req, res) => {
     User.findOneByUsername(username, user => {
         if(user && password == crypt.decrypt(user.password)) {
             req.session.username = username;
-            res.sendFile('/views/index.html', { root: __dirname+'/../' });
+            res.json({ redirect: '/' });
         } else {
-            res.sendFile('/views/login.html', { root: __dirname+'/../' });
+            res.json({ redirect: '/login' });
         }
     });
 }
@@ -57,7 +57,7 @@ exports.loginUser = (req, res) => {
 /* [POST] LOGS USER OUT */
 exports.logoutUser = (req, res) => {
     delete req.session.username;
-    res.sendFile('/views/login.html', { root: __dirname+'/../' });
+    res.redirect('/login');
 }
 
 /* [PUT] USER */
@@ -68,12 +68,10 @@ exports.updateUser = (req, res) => {
         user.password = crypt.encrypt(user.password);
     }
 
-    User.update(user, user_id => {
-        User.findOne(user_id, newUser => {
-            return res.json({
-                users: newUser,
-                message: 'Successfully updated a user'
-            });
+    User.update(user, newUser => {
+        return res.json({
+            users: newUser,
+            message: 'Successfully updated a user'
         });
     });
 };

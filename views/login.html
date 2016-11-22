@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="/bower_components/semantic/dist/semantic.css">
     <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
-<body class >
+<body ng-controller="loginController as login">
 	<div class = "own-center-1"> 
 		<div class="ui centered grid own-center-2">
 	    	<div class = "ui six wide column grid card">
-				<form class="ui form">
+				<form class="ui form" ng-submit="login.loginUser()">
 				  <div class="field">
 				    <label>Username</label>
-				    <input type="text" name="user-name" placeholder="Username">
+				    <input type="text" name="user-name" placeholder="Username" ng-model="login.username">
 				  </div>
 				  <div class="field">
 				    <label>Password</label>
-				    <input type="password" name="pass-word" placeholder="Password">
+				    <input type="password" name="pass-word" placeholder="Password" ng-model="login.password">
 				  </div>
-					<div class="ui animated button" tabindex="0">
+					<div class="ui animated button" tabindex="0" ng-click="login.loginUser()">
 					  <div class="visible content">Login</div>
 					  <div class="hidden content">
 					    <i class="right arrow icon"></i>
@@ -30,5 +30,6 @@
    </div>
     <script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="/bower_components/semantic/dist/semantic.js"></script>
+    <script type="text/javascript" src="bundle.js"></script>
 </body>
 </html>

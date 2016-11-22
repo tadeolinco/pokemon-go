@@ -11,3 +11,6 @@ require('./app.routes');
 /* SERVICES */
 
 /* DIRECTIVES */
+
+/* CONTROLLERS */
+require('./login/login.controller');
