@@ -1,13 +1,52 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-    <title></title>
+    <title>Pokemon Go!</title>
     <script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
-    <link rel="stylesheet" type="text/css" href="/bower_components/semantic/dist/semantic.css">
     <script type="text/javascript" src="/bower_components/semantic/dist/semantic.js"></script>
+    <link rel="stylesheet" type="text/css" href="/bower_components/semantic/dist/semantic.min.css">
 </head>
 <body>
-    
+	
+	<div class="ui one column grid">
+		<div class="row">
+			<div class="column">
+				<div class="ui secondary pointing menu">
+					<a class="item"></a>
+					<a class="item">Home</a>
+					<a class="item">Messages</a>
+					<a class="item">Friends</a>
+					<div class="right menu">
+						<a class="item">Logout</a>
+				  	</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="ui three column grid">
+		<div class="row">
+			<div class="column">
+				<select name="search-by" class="ui dropdown" id="select">
+				  <option value="">Search By</option>
+				  <option value="user">User</option>
+				  <option value="pokemon">Pokemon</option>
+				  <option value="gym">Gym</option>
+				</select>
+			</div>
+			<div class="column">
+
+			</div>
+			<div class="column">
+				
+			</div>
+		</div>
+	</div>
+
+
+
+
+
     <script type="text/javascript" src="bundle.js"></script>
 </body>
 </html>
