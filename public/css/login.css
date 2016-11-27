@@ -1,17 +1,14 @@
-body {
-    display: table;
-    position: absolute;
-    height: 100%;
-    width: 100%;
+.landing-image {
+    background-image:url('/assets/pokemon-piclog4.jpg') !important;
+	background-repeat:no-repeat !important;
+	background-size:cover !important;
+	background-position:center !important;
 }
 
-.own-center-1 {
-    display: table-cell;
-    vertical-align: middle;
+.test{
+	background-color: red;
 }
 
-.own-center-2 {
-    margin-left: auto;
-    margin-right: auto; 
-    width: 100%;
+.out-grid{
+	height: 100% !important;
 }

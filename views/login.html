@@ -5,30 +5,111 @@
     <link rel="stylesheet" type="text/css" href="/bower_components/semantic/dist/semantic.css">
     <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
-<body class >
-	<div class = "own-center-1"> 
-		<div class="ui centered grid own-center-2">
-	    	<div class = "ui six wide column grid card">
-				<form class="ui form">
-				  <div class="field">
-				    <label>Username</label>
-				    <input type="text" name="user-name" placeholder="Username">
-				  </div>
-				  <div class="field">
-				    <label>Password</label>
-				    <input type="password" name="pass-word" placeholder="Password">
-				  </div>
-					<div class="ui animated button" tabindex="0">
-					  <div class="visible content">Login</div>
-					  <div class="hidden content">
-					    <i class="right arrow icon"></i>
-					  </div>
-					</div>		
-				</form>
-	    	</div>
-	   </div>
-   </div>
+<body class = "landing-image">
+	<div class="ui middle aligned grid out-grid">
+		<div class = "row">
+			<div class = "sixteen wide centered column">
+				<div class="ui two column very relaxed stackable centered grid">
+					<div class="left aligned seven wide column">
+						<br>	
+						<h1>
+						 	Welcome to PokeMONGO	
+						</h1>	
+						<br>	
+						<h2>
+							Connect with pokemons — and other fascinating trainers. Get in-the-moment updates on the things that interest you. And monitor battles unfold, in real time, from every angle.
+						</h2>
+  					</div>
+  					<div class="five wide column">
+	  					<div class ="ui fluid card">
+	  						<div class="content">
+		  						<div class="header">
+									LOGIN
+								</div>
+							</div>
+							<div class = "content">
+								<div class="ui form">
+									<div class="field">
+										<div class="ui left icon input">
+											<input type="text" placeholder="Username">
+												<i class="user icon"></i>
+										</div>
+									</div>
+									<div class="field">
+										<div class="ui left icon input">
+											<input type="password" placeholder = "Password">
+												<i class="lock icon"></i>
+										</div>
+									</div>
+									<div class="ui blue submit button">Login</div>
+								</div>
+							</div>
+						</div>
+						<div class = "ui fluid card">
+							<div class ="content">	
+								<div class="header">
+									SIGN UP
+								</div>
+							</div>
+							<div class = "content">
+								<div class="ui form">
+									<div class="field">
+										<div class="ui left icon input">
+											<input type="text" placeholder="Name">
+											<i class="user icon"></i>
+										</div>
+									</div>
+									<div class="field">
+										<div class="ui left icon input">
+											<input type="text" placeholder="Username">
+											<i class="user icon"></i>
+										</div>
+									</div>
+									<div class="field">
+										<div class="ui left icon input">
+											<input type="password" placeholder = "Password">
+												<i class="lock icon"></i>
+										</div>
+									</div>
+									<div class="field">
+										<div class="ui selection dropdown">
+											<input type="hidden" name="sex">
+											<i class="dropdown icon"></i>
+											<div class="default text">Gender</div>
+											<div class="menu">
+												<div class="item" data-value="Male">Male</div>
+												<div class="item" data-value="Female">Female</div>
+											</div>
+										</div>
+									</div>									
+									<div class="field">
+										<div class="ui selection dropdown">
+											<input type="hidden" name="country">
+											<i class="dropdown icon"></i>
+											<div class="default text">Country</div>
+											<div class="menu">
+											<!-- ng rep -->
+											</div>
+										</div>
+									</div>
+									<div class="ui green labeled icon button">
+										<i class="signup icon"></i>
+							    		Sign Up
+									</div>						
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="ui container">
+		CMSC 127 Project PokeMONGO December 2016
+	</footer>
+</body>
     <script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="/bower_components/semantic/dist/semantic.js"></script>
+    <script type="text/javascript" src="/js/login.js"></script>
 </body>
 </html>
