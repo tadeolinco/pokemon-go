@@ -5,31 +5,110 @@
     <link rel="stylesheet" type="text/css" href="/bower_components/semantic/dist/semantic.css">
     <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
-<body ng-controller="loginController as login">
-	<div class = "own-center-1"> 
-		<div class="ui centered grid own-center-2">
-	    	<div class = "ui six wide column grid card">
-				<form class="ui form" ng-submit="login.loginUser()">
-				  <div class="field">
-				    <label>Username</label>
-				    <input type="text" name="user-name" placeholder="Username" ng-model="login.username">
-				  </div>
-				  <div class="field">
-				    <label>Password</label>
-				    <input type="password" name="pass-word" placeholder="Password" ng-model="login.password">
-				  </div>
-					<button type="submit" class="ui animated button" tabindex="0" ng-click="login.loginUser()">
-					  <div class="visible content">Login</div>
-					  <div class="hidden content">
-					    <i class="right arrow icon"></i>
-					  </div>
-					</button>		
-				</form>
-	    	</div>
-	   </div>
-   </div>
+<body class = "landing-image" ng-controller = "loginController as login">
+	<div class="ui middle aligned grid out-grid">
+		<div class = "row">
+			<div class = "sixteen wide centered column">
+				<div class="ui two column very relaxed stackable centered grid">
+					<div class="left aligned seven wide column login-text">
+						<br>	
+						 <img class="ui large image" src="/assets/pokemongo-title.png">
+						<br>	
+						<span class = "wel-text">
+							Kumonekta sa mga pokemons — at ibang mga tagapagsanay. 
+							<!-- Connect with pokemons — and other fascinating trainers. Get in-the-moment updates on the things that interest you. And monitor battles unfold, in real time, from every angle. -->
+						</span>
+  					</div>
+  					<div class="five wide column">
+	  					<div class ="ui fluid card">
+	  						<div class="content">
+		  						<div class="header">
+									LOGIN
+								</div>
+							</div>
+							<div class = "content">
+								<form class="ui form" ng-submit = "login.loginUser()">
+									<div class="field">
+										<div class="ui left icon input">
+											<input type="text" placeholder="Username" ng-model = "login.username">
+												<i class="user icon"></i>
+										</div>
+									</div>
+									<div class="field">
+										<div class="ui left icon input">
+											<input type="password" placeholder = "Password" ng-model = "login.password">
+												<i class="lock icon"></i>
+										</div>
+									</div>
+									<button class="ui blue animated button" tabindex="0" type = "submit" ng-click = "login.loginUser()">
+										<div class="visible content">Login</div>
+										<div class="hidden content">
+											<i class="right arrow icon"></i>
+										</div>
+									</button>
+								</form>
+							</div>
+						</div>
+						<div class = "ui fluid card">
+							<div class ="content">	
+								<div class="header">
+									SIGN UP
+								</div>
+							</div>
+							<div class = "content">
+								<div class="ui form">
+									<div class="field">
+										<div class="ui left icon input">
+											<input type="text" placeholder="Name">
+											<i class="user icon"></i>
+										</div>
+									</div>
+									<div class="field">
+										<div class="ui left icon input">
+											<input type="text" placeholder="Username">
+											<i class="user icon"></i>
+										</div>
+									</div>
+									<div class="field">
+										<div class="ui left icon input">
+											<input type="password" placeholder = "Password">
+												<i class="lock icon"></i>
+										</div>
+									</div>
+									<div class="field">
+						                <select class="ui dropdown" id="select-sex" name="select sex">
+						                  	<option value="">Sex</option>
+						                    <option value="Male">Male</option>
+						                    <option value="Female">Female</option>
+						                </select>
+									</div>									
+									<div class="field">
+						                <select class="ui dropdown" ng-model="main.category" id="search-by-select" name="select-by">
+						                    <option value="">{{main.searchError}}</option>
+						                    <option ng-repeat="option in main.options" 
+						                            value="{{option.value}}">
+						                            {{option.label}}
+						                    </option>
+						                </select>
+									</div>
+									<div class="ui yellow labeled icon button">
+										<i class="signup icon"></i>
+							    		Sign Up
+									</div>						
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="ui container">
+		CMSC 127 Project PokeMONGGO December 2016
+	</footer>
     <script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="/bower_components/semantic/dist/semantic.js"></script>
-    <script type="text/javascript" src="bundle.js"></script>
+    <script type="text/javascript" src="/bundle.js"></script>
+    <script type="text/javascript" src="/js/login.js"></script>
 </body>
 </html>
