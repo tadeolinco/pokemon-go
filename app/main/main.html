@@ -1,0 +1,120 @@
+<div class="ui grid centered">
+    <form class="row ui form" ng-submit="main.search()">
+        <div class="five wide column">
+            <div class="field">
+                <select class="ui dropdown" ng-model="main.category">
+                    <option ng-repeat="option in main.options" 
+                            value="{{option.value}}">
+                            {{option.label}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="five wide column">
+            <input type="text" ng-model="main.input">
+        </div>
+        <div class="five wide column">
+            <button type="submit">Search</button>
+        </div>
+    </form>
+</div>
+<div class = "ui grid centered">
+    <div class="ui top attached tabular menu">
+        <div ng-repeat="result in main.results" class="item tab-{{result.key}}"  ng-click="main.activateTab(result.key)">
+            {{result.field}}
+        </div>
+    </div>
+    <div class="row" ng-if="main.searching">
+        <div class="sixteen wide column middle aligned">
+            <div class="ui active massive inline loader"></div>
+        </div>
+    </div>
+    <div class="ui bottom attached tab segment tab-{{result.key}}" ng-repeat="result in main.results">
+        <div class="ui grid centered">
+            <div class="three wide column" ng-repeat="unit in result.data | orderBy : result.key track by $index"
+            ng-click="main.openModal(unit)">
+                <div class="ui fluid special card centered">
+                    <div class="blurring dimmable image">
+                        <div class="ui dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <div class="ui inverted button">View/Edit</div>
+                                </div>
+                                <div class="center">
+                                    <div class="ui inverted button">Delete</div>
+                                </div>
+                            </div>
+                        </div>  
+                        <img class="ui image fluid" ng-src="/assets/pokemons/{{unit.entity}}.png">
+                    </div>
+                    <div class="content">
+                        <div class="header">
+                            {{unit.name}}
+                        </div>
+                        <div class="meta">
+                            <div ng-if="unit.username">User</div>
+                            <div ng-if="unit.pokemon_id">Pokemon</div>
+                            <div ng-if="unit.prestige">Gym</div>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <i class="user icon"></i>
+                            <span ng-if="unit.username">
+                                <span ng-if="unit.team !== 'NULL'" class="capitalize">Team {{unit.team}}</span>
+                                <span ng-if="unit.team === 'NULL'">No team</span>
+                            </span>
+                            <span ng-if="!unit.username">
+                                Owned by
+                                <span ng-if="unit.pokemon_id">User #{{unit.user_id}}</span>
+                                <span ng-if="unit.prestige">
+                                    <span ng-if="unit.team === 'NULL'">no team</span>
+                                    <span ng-if="unit.team !== 'NULL'" class="capitalize">Team {{unit.team}}</span>
+                                </span>
+                            </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>    
+
+<!-- MODAL -->
+    <div class="ui modal small" id="modal-pokemon">
+        <i class="close icon"></i>
+        <div class="header">
+            {{main.unit.name}}
+        </div>
+        <div class="image content ui grid" style="background: transparent;">
+            <div class="ui image eight wide column fluid middle aligned">
+                <img ng-src="/assets/pokemons/{{main.unit.entity}}.png">
+            </div>
+            <div class="description eight wide centered column">
+                <div class="ui big list">
+                    <div class="item" ng-repeat="(attribute, value) in main.unit">
+                        <span class="header capitalize">{{main.snakeToEng(attribute)}}</span>
+                        <span class="capitalize">{{main.isNone(value)}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui blue right labeled icon button">
+                Edit
+                <i class="edit icon"></i>
+            </div>
+            <div class="ui black cancel button">
+                Cancel
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    
+    $('.ui.modal').modal({
+        closable  : false,
+        detachable : false
+    });
+
+</script>

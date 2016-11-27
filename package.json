@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "angular": "^1.5.8",
+    "angular-animate": "^1.5.8",
     "angular-route": "^1.5.8",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
@@ -16,7 +17,7 @@
   "devDependencies": {},
   "scripts": {
     "postinstall": "bower install",
-    "start": "concurrently -k 'watchify app/app.module.js -o public/bundle.js -dv'  'nodemon app.js'"
+    "start": "concurrently -k 'watchify app/app.module.js -o public/bundle.js -v --debug'  'nodemon app.js'"
   },
   "author": "",
   "license": "ISC"

@@ -12,3 +12,4 @@ require('./app.routes');
 
 /* CONTROLLERS */
 require('./login/login.controller');
+require('./main/main.controller');

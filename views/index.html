@@ -3,6 +3,7 @@
 <head>
     <title>Pokemon Go!</title>
     <link rel="stylesheet" type="text/css" href="/bower_components/semantic/dist/semantic.min.css">
+	<link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 	
@@ -21,25 +22,7 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="ui three column grid">
-		<div class="row">
-			<div class="column">
-				<select name="search-by" class="ui dropdown" id="select">
-				  <option value="">Search By</option>
-				  <option value="user">User</option>
-				  <option value="pokemon">Pokemon</option>
-				  <option value="gym">Gym</option>
-				</select>
-			</div>
-			<div class="column">
-
-			</div>
-			<div class="column">
-				
-			</div>
-		</div>
-	</div>
+	<div ng-view></div>
     <script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="/bower_components/semantic/dist/semantic.js"></script>
     <script type="text/javascript" src="bundle.js"></script>

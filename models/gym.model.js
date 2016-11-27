@@ -8,6 +8,14 @@ exports.findAll = (cb) => {
     });
 }
 
+exports.findChallengedByUser = (user_id, cb) => {
+    db.query('SELECT gym.gym_id, name, country, number_of_users_battled, team, prestige FROM gym, challenges WHERE challenges.user_id = ? and challenges.gym_id = gym.gym_id'
+, [user_id], (err, rows) => {
+        if (err) throw err;
+        return cb(rows);
+    });
+}
+
 /* Returns a gym tuple specificed by its gym_id */
 exports.findOne = (gym_id, cb) => {
     db.query('SELECT * FROM gym WHERE gym_id = ?', [gym_id], (err, rows) => {

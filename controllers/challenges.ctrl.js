@@ -3,10 +3,7 @@ const Challenges = require('../models/challenges.model');
 /* [GET] ALL CHALLENGES */
 exports.getChallenges = (req, res) => {
     Challenges.findAll(challenges => {
-        return res.json({
-            challenges: challenges,
-            message: 'Successfully fetched all challenges'
-        });
+        return res.json(challenges);
     })
 }
 
@@ -14,10 +11,7 @@ exports.getChallenges = (req, res) => {
 exports.getChallenge = (req, res) => {
     var ids = req.params;
     Challenges.findOne(ids, challenge => {
-        return res.json({
-            challenges: challenge,
-            message: 'Successfully fetched one challenge'
-        });
+        return res.json(challenge);
     });
 }
 
@@ -27,10 +21,7 @@ exports.createChallenge = (req, res) => {
 
     Challenges.create(challenge, ids => {
         Challenges.findOne(ids, newChallenge => {
-            return res.json({
-                challenges: newChallenge,
-                message: 'Successfully created new challenge'
-            });
+            return res.json(newChallenge);
         });
     });
 }
@@ -40,17 +31,13 @@ exports.deleteChallenge = (req, res) => {
     var ids = req.params;
 
     Challenges.deleteOne(ids, () => {
-        res.json({
-            message: 'Successfully deleted a challenge'
-        });
+        res.json({});
     });
 }
 
 /* [DELETE] ALL CHALLENGES */
 exports.deleteChallenges = (req, res) => {
     Challenges.deleteAll(() => {
-        res.json({
-            message: 'Successfully deleted all challenges'
-        });
+        res.json({});
     });
 }

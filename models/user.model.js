@@ -15,6 +15,14 @@ exports.findOneByUsername = (username, cb) => {
     });
 }
 
+exports.findChallenging = (gym_id, cb) => {
+    db.query('SELECT user.user_id, name, gender, country, date_registered, number_of_gyms_battled, team, level, username, password FROM user, challenges WHERE challenges.gym_id = ? and challenges.user_id = user.user_id'
+    , [gym_id], (err, rows) => {
+        if (err) throw err;
+        return cb(rows);
+    });
+}
+
 /* Returns a user tuple specificed by its user_id */
 exports.findOne = (user_id, cb) => {
     db.query('SELECT * FROM user WHERE user_id = ?', [user_id], (err, rows) => {

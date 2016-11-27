@@ -4,9 +4,12 @@ module.exports = (function() {
 	angular
 		.module('app')
 		.config(function($routeProvider) {
-			/*$routeProvider
-			.when("/", {
-				
-			})*/
+			$routeProvider
+				.when('/', {
+					templateUrl: 'app/main/main.html',
+					controller: 'mainController',
+					controllerAs: 'main'
+				});
+            
 		});
 })();
