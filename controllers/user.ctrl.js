@@ -4,10 +4,7 @@ const crypt = require('../crypt');
 /* [GET] ALL USERS */
 exports.getUsers = (req, res) => {
     User.findAll(users => {
-        return res.json({
-            users: users,
-            message: 'Successfully fetched all users'
-        });
+        return res.json(users);
     });
 };
 
@@ -16,13 +13,17 @@ exports.getUser = (req, res) => {
     var user_id = req.params.user_id;
 
     User.findOne(user_id, user => {
-        return res.json({
-            users: user,
-            message: 'Successfully fetched a user'
-        });
+        return res.json(user);
     });
 }
 
+exports.getChallenging = (req, res) => {
+    var gym_id = req.params.gym_id;
+
+    User.findChallenging(gym_id, users => {
+        return res.json(users);
+    });
+}
 
 /* [POST] USER */
 exports.registerUser = (req, res) => {
@@ -31,10 +32,7 @@ exports.registerUser = (req, res) => {
 
     User.create(user, user_id => {
         User.findOne(user_id, newUser => {
-            return res.json({
-                users: newUser,
-                message: 'Successfully registered a user'
-            });
+            return res.json(newUser);
         });
     });
 };
@@ -69,10 +67,7 @@ exports.updateUser = (req, res) => {
     }
 
     User.update(user, newUser => {
-        return res.json({
-            users: newUser,
-            message: 'Successfully updated a user'
-        });
+        return res.json(newUser);
     });
 };
 
@@ -81,17 +76,13 @@ exports.deleteUser = (req, res) => {
     var user_id = req.params.user_id;
 
     User.delete(user_id, () => {
-        return res.json({
-            message: 'Successfully deleted a user'
-        });
+        return res.json({});
     });
 }
 
 /* [DELETE] USER BY ID */
 exports.deleteUsers = (req, res) => {
     User.deleteAll(() => {
-        return res.json({
-            message: 'Successfully deleted all users'
-        });
+        return res.json({});
     });
 }

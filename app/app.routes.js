@@ -5,8 +5,11 @@ module.exports = (function() {
 		.module('app')
 		.config(function($routeProvider) {
 			$routeProvider
-			.when("/", {
-				
-			})
-		})
+				.when('/', {
+					templateUrl: 'app/main/main.html',
+					controller: 'mainController',
+					controllerAs: 'main'
+				});
+            
+		});
 })();

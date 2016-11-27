@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname,'/public')));
 app.use('/bower_components', 
     express.static(path.join(__dirname, '/bower_components')));
+app.use('/app', express.static(path.join(__dirname, '/app')));
 
 app.use(session({
     secret: 'sir regi still da best',
