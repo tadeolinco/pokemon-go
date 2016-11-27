@@ -2,7 +2,8 @@
     <form class="row ui form" ng-submit="main.search()">
         <div class="five wide column">
             <div class="field">
-                <select class="ui dropdown" ng-model="main.category">
+                <select class="ui dropdown" ng-model="main.category" id="search-by-select" name="select-by">
+                    <option value="">{{main.searchError}}</option>
                     <option ng-repeat="option in main.options" 
                             value="{{option.value}}">
                             {{option.label}}
@@ -11,10 +12,10 @@
             </div>
         </div>
         <div class="five wide column">
-            <input type="text" ng-model="main.input">
+            <input type="text" ng-model="main.input" placeholder="Enter text">
         </div>
         <div class="five wide column">
-            <button type="submit">Search</button>
+            <button id="search-button" class="ui button" type="submit">Search</button>
         </div>
     </form>
 </div>
@@ -116,5 +117,23 @@
         closable  : false,
         detachable : false
     });
+
+    $('#search-by-select').dropdown();
+
+    $('.ui.form')
+      .form({
+        fields: {
+          name: {
+            identifier: 'select-by',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please select something'
+              }
+            ]
+          }
+        }
+      })
+    ;
 
 </script>

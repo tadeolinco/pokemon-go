@@ -13,12 +13,13 @@
             { label: 'Search by Gym'    , value: 'gyms' },
         ];
 
-        vm.category = 'pokemons';      // defaults
+        vm.category = '';      // defaults
         vm.input = '';
         vm.results = [];
         vm.searching = false;
         vm.searchType = '';
         vm.unit = null;
+        vm.searchError = 'Search by...';
 
         vm.search = search;
         vm.openModal = openModal;
@@ -27,6 +28,13 @@
         vm.isNone = isNone;
 
         function search() {
+
+            if (!vm.category) {
+                vm.searchError = 'Please select something';
+                return;
+            }
+
+
             vm.results = [];
             vm.searching = true;
             console.log('/'+vm.category);
