@@ -1,9 +1,15 @@
 const angular = require('angular');   
 
-angular.module('app', []);
+angular.module('app', ['ngRoute']);
 
-/* CONTROLLERS */
+/* ROUTES */
+require('angular-route');
+require('./app.routes');
 
 /* SERVICES */
 
 /* DIRECTIVES */
+
+/* CONTROLLERS */
+require('./login/login.controller');
+require('./main/main.controller');

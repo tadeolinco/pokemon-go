@@ -3,10 +3,7 @@ const Pokemon = require('../models/pokemon.model');
 /* [GET] ALL POKEMONS */
 exports.getPokemons = (req, res) => {
     Pokemon.findAll(pokemons => {
-        return res.json({
-            pokemons: pokemons,
-            message: 'Successfully fetched all pokemons'
-        });
+        return res.json(pokemons);
     });
 };
 
@@ -15,10 +12,7 @@ exports.getPokemon = (req, res) => {
     var pokemon_id = req.params.pokemon_id;
 
     Pokemon.findOne(pokemon_id, pokemon => {
-        return res.json({
-            pokemons: pokemon,
-            message: 'Successfully fetched a pokemon'
-        });
+        return res.json(pokemon);
     });
 }
 
@@ -28,10 +22,7 @@ exports.createPokemon = (req, res) => {
 
     Pokemon.create(pokemon, pokemon_id => {
         Pokemon.findOne(pokemon_id, newPokemon => {
-            return res.json({
-                pokemons: newPokemons,
-                message: 'Successfully created a pokemon'
-            });
+            return res.json(newPokemon);
         });
     });
 };
@@ -41,13 +32,8 @@ exports.updatePokemon = (req, res) => {
     var pokemon = req.body;
     pokemon.pokemon_id = req.params.pokemon_id;
 
-    Pokemon.update(pokemon, pokemon_id => {
-        Pokemon.findOne(pokemon_id, newPokemon => {
-            return res.json({
-                pokemons: newPokemon,
-                message: 'Successfully updated a pokemon'
-            });
-        });
+    Pokemon.update(pokemon, newPokemon => {
+        return res.json(newPokemon);
     });
 };
 
@@ -56,17 +42,13 @@ exports.deletePokemon = (req, res) => {
     var pokemon_id = req.params.pokemon_id;
 
     Pokemon.delete(pokemon_id, () => {
-        return res.json({
-            message: 'Successfully deleted a pokemon'
-        });
+        return res.json({});
     });
 }
 
 /* [DELETE] ALL POKEMON */
 exports.deletePokemons = (req, res) => {
     Pokemon.deleteAll(() => {
-        return res.json({
-            message: 'Successfully deleted all pokemons'
-        });
+        return res.json({});
     });
 }
