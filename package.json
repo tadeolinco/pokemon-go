@@ -12,7 +12,8 @@
     "crypto": "0.0.3",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
-    "mariasql": "^0.2.6"
+    "mariasql": "^0.2.6",
+    "morgan": "^1.7.0"
   },
   "devDependencies": {},
   "scripts": {
