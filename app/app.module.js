@@ -11,5 +11,6 @@ require('./app.routes');
 /* DIRECTIVES */
 
 /* CONTROLLERS */
+require('./nav/nav.controller');
 require('./login/login.controller');
 require('./main/main.controller');

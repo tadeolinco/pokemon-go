@@ -5,19 +5,16 @@
     <link rel="stylesheet" type="text/css" href="/bower_components/semantic/dist/semantic.min.css">
 	<link rel="stylesheet" href="/css/styles.css">
 </head>
-
 <body class="ui container">
 	
-	<div class="ui one column grid">
+	<div class="ui one column grid" ng-controller="navController as nav">
 		<div class="row">
 			<div class="column">
 				<div class="ui secondary pointing menu">
-					<!-- <a class="item">
+					<a class="item">
 						<img src="/assets/logo.png"></img>
-					</a> -->
-					<a class="item">Home</a>
-					<a class="item">Messages</a>
-					<a class="item">Friends</a>
+					</a>
+					<a ng-click="nav.activateLink(navItem.link)" class="yellow item link-{{navItem.text}}" ng-repeat="navItem in nav.navLinks" href="/#{{ navItem.link}}">{{ navItem.text }}</a>
 					<div class="right menu">
 						<a class="item">Logout</a>
 				  	</div>
