@@ -9,6 +9,7 @@ require('./app.routes');
 /* SERVICES */
 
 /* DIRECTIVES */
+require('./modals/pokemon/modal-pokemon.directive');
 
 /* CONTROLLERS */
 require('./login/login.controller');

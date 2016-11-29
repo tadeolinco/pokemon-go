@@ -115,7 +115,7 @@
         function search() {
 
             if (!vm.category) {
-                vm.searchError = 'Please select something';
+                vm.searchError = 'Please select a category';
                 return;
             }
 
