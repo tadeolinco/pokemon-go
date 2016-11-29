@@ -45,9 +45,9 @@ exports.loginUser = (req, res) => {
     User.findOneByUsername(username, user => {
         if(user && password == crypt.decrypt(user.password)) {
             req.session.username = username;
-            res.json({ redirect: '/' });
+            return res.status(200).json({ redirect: '/' });
         } else {
-            res.json({ redirect: '/login' });
+            return res.status(200).json({ redirect: '/login' });
         }
     });
 }
@@ -55,7 +55,7 @@ exports.loginUser = (req, res) => {
 /* [POST] LOGS USER OUT */
 exports.logoutUser = (req, res) => {
     delete req.session.username;
-    res.redirect('/login');
+    res.json({ redirect: '/login' });
 }
 
 /* [PUT] USER */

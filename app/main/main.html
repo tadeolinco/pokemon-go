@@ -1,5 +1,5 @@
 <div class="ui grid centered">
-    <form class="row ui form" ng-submit="main.search()">
+    <form class="row ui form" ng-submit="main.search($event)">
         <div class="five wide column">
             <div class="field">
                 <select class="ui dropdown" ng-model="main.category" id="search-by-select" name="select-by">
@@ -81,139 +81,10 @@
 </div>    
 
 <!-- MODAL -->
-    <div class="ui modal mini" id="modal-pokemon">
-        <i class="close icon"></i>
-        <div class="header">
-            Pokemon
-        </div>
-        <div class="image content ui grid" style="background: transparent;">
-            <div class="description eight wide centered column">
-                <table class="ui celled compact table">
-                    <thead>
-                        <tr>
-                            <th>Attribute</th>
-                            <th>Value</th>
-                        </tr>
-                    </thead>
-                    <tbody ng-if="!main.editing">
-                        <tr ng-repeat="(attribute, value) in main.unit">
-                            <td class="capitalize bold">{{main.snakeToEng(attribute)}}</td>
-                            <td class="capitalize">{{main.isNone(value)}}</td>
-                        </tr>
-                    </tbody>
-                    <tbody ng-if="main.editing" class="ui mini form">
-                        <tr>
-                            <td class="bold">Pokemon Id</td>
-                            <td class="disabled field">
-                                <input type="text" ng-model="main.unit.pokemon_id">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Entity</td>
-                            <td class="field">
-                                <select class="ui dropdown" ng-model="main.unit.entity">
-                                    <option ng-repeat="entity in main.entities" 
-                                            value="{{entity}}">
-                                            <span class="capitalize">{{main.snakeToEng(entity)}}</span>
-                                    </option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Name</td>
-                            <td class="field">
-                                <input type="text" ng-model="main.unit.name">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Cp</td>
-                            <td class="field">
-                                <input type="number" ng-model="main.unit.cp">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Type1</td>
-                            <td class="field">
-                                <select class="ui dropdown" ng-model="main.unit.type1">
-                                    <option ng-repeat="type in main.types" 
-                                            value="{{type}}">
-                                            <span class="capitalize">{{type}}</span>
-                                    </option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Type2</td>
-                            <td class="field">
-                                <select class="ui dropdown" ng-model="main.unit.type2">
-                                    <option value="NULL">NULL</option>
-                                    <option ng-repeat="type in main.types" 
-                                            value="{{type}}">
-                                            <span class="capitalize">{{type}}</span>
-                                    </option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Level</td>
-                            <td class="field">
-                                <input type="number" ng-model="main.unit.level">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Date Caught</td>
-                            <td class="field">
-                                <input type="date" ng-model="main.unit.date_caught">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bold">User Id</td>
-                            <td class="field">
-                                <input type="number" ng-model="main.unit.user_id">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bold">Gym Id</td>
-                            <td class="field">
-                                <input type="number" ng-model="main.unit.gym_id">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="eight wide column middle aligned">
-                <div class="container img-background">
-                    <div class="ui image fluid">
-                        <img ng-src="/assets/pokemons/{{main.unit.entity}}.png">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="actions">
-            <div ng-if="!main.editing">
-                <div class="ui blue right labeled icon button" ng-click="main.editPokemon()">Edit
-                    <i class="edit icon"></i></div>
-                <div class="ui black cancel button">Cancel</div>
-            </div>
-            <div ng-if="main.editing">
-                <div class="ui blue right labeled icon button" ng-click="main.savePokemon()">Save
-                    <i class="edit icon"></i></div>
-                <div class="ui black cancel button">Cancel</div>
-            </div>
-        </div>
-    </div>
+<modal-pokemon></modal-pokemon>
 
 <script>
-    $('.ui.modal').modal({
-        closable  : false,
-        detachable : false
-    });
 
-<<<<<<< HEAD
-    $('.special.card').on('ready', '.image', function() {
-        $(this).dimmer({});
-    });
-=======
     $('#search-by-select').dropdown();
 
     $('.ui.form')
@@ -231,6 +102,5 @@
         }
       })
     ;
->>>>>>> b8d440358c655edfcf71f01992c75b2925dc4a05
 
 </script>

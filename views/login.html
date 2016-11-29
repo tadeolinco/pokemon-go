@@ -26,7 +26,7 @@
 								</div>
 							</div>
 							<div class = "content">
-								<form class="ui form" id = "loginForm" ng-submit = "login.loginUser()">
+								<form class="ui form" id = "loginForm" ng-submit = "login.loginUser($event)">
 									<div class="field">
 										<div class="ui left icon input">
 											<input type="text" placeholder="Username" name="login username" ng-model = "login.username">
@@ -39,7 +39,7 @@
 												<i class="lock icon"></i>
 										</div>
 									</div>
-									<button class="ui blue animated button" tabindex="0" type = "submit">
+									<button class="ui blue animated button" tabindex="0" type="submit">
 										<div class="visible content">Login</div>
 										<div class="hidden content">
 											<i class="right arrow icon"></i>
@@ -75,26 +75,26 @@
 										</div>
 									</div>
 									<div class="field">
-		                <select class="ui dropdown" id="select-sex" name="reg sex" ng-model = "reg.sex">
-		                  	<option value="">Sex</option>
-		                    <option value="Male">Male</option>
-		                    <option value="Female">Female</option>
-		                </select>
-									</div>									
-									<div class="field">
-		                <select class="ui dropdown" id="select-country" name="reg country" ng-model="reg.country">
-		                		<option value = "">Country</option>
-		                    <option ng-repeat="country in reg.country_list" value="{{country}}">{{country}}</option>
-		                </select>
+										<select class="ui dropdown" id="select-sex" name="reg sex" ng-model = "reg.sex">
+											<option value="">Sex</option>
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
+										</select>
 									</div>
-									<button class="ui yellow labeled icon button" id = "signUpButton" ng-click = "reg.regUser()">
+									<div class="field">
+										<select class="ui dropdown" id="select-country" name="reg country" ng-model="reg.country">
+												<option value = "">Country</option>
+											<option ng-repeat="country in reg.country_list" value="{{country}}">{{country}}</option>
+										</select>
+									</div>
+									<button class="ui yellow labeled icon button" id = "signUpButton" ng-click = "reg.regUser($event)">
 										<i class="signup icon"></i>
 							    		Sign Up
 									</button>	
 									<div class="ui success mini message" ng-if="reg.success">
 									  <div class="header">Sign up successful! You can now login with your account.</div>
 									</div>
-									<div class="ui negative mini message" ng-if = "reg.error">
+									<div class="ui negative mini message" ng-if="reg.error">
 									  <div class="header">Sign up unsuccessful!</div>
 									</div>
 								</form>							

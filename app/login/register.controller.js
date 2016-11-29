@@ -24,7 +24,8 @@
         }
 
 
-        function regUser() {
+        function regUser(e) {
+            e.preventDefault();
             var isValid = true;
 
             if(vm.success || vm.error){
@@ -55,7 +56,7 @@
                 $http
                     .post('/register', information)
                     .then(response => { // success
-                        vm.success = true;  
+                        vm.success = true;
                         console.log('Successfully registered!');
                         vm.name = null;
                         vm.username = null;
