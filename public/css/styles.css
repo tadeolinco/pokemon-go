@@ -1,3 +1,17 @@
 .capitalize {
     text-transform: capitalize;
 }
+
+.bold {
+    font-weight: bold;
+}
+
+.img-background {
+    background-color: #F3F3F3;
+    border-radius: 10px;
+}
+
+body {
+    max-height: 100vh;
+    
+}
