@@ -30,31 +30,80 @@
         vm.activateTab = activateTab;
         vm.snakeToEng = snakeToEng;
         vm.isNone = isNone;
+
+        vm.viewPokemonStop = viewPokemonStop;
         vm.editPokemon = editPokemon;
+        vm.editPokemonStop = editPokemonStop;
         vm.savePokemon = savePokemon;
+        vm.deletePokemon = deletePokemon;
+        vm.deletePokemonConfirm = deletePokemonConfirm;
+
+        function viewPokemonStop() {
+            $('#modal-'+vm.searchType).modal('hide');
+        }
+
+        function deletePokemonConfirm(confirm) {
+            if (confirm) {
+                $('#pokemon-delete-confirm').modal('hide');
+                for (let result of vm.results) {
+                    result.data = result.data.filter(pokemon => {
+                        return pokemon.pokemon_id !== vm.unit.pokemon_id;
+                    });
+                }
+            } else {
+                setTimeout(function() {
+                    $('#modal-'+vm.searchType)
+                        .modal('setting', {
+                            closable: false,
+                            detachable: false,
+                            observeChanges: true,
+                            duration: 300,
+                        })
+                        .modal('show');
+                }, 1);
+            }
+
+        }
+
+        function deletePokemon() {
+            setTimeout(function() {
+                $('#pokemon-delete-confirm')
+                    .modal('setting', {
+                        closable: false,
+                        detachable: false,
+                        observeChanges: true,
+                        duration: 300,
+                    })
+                    .modal('show');
+            }, 1);
+        }
 
         function savePokemon() {
             vm.editing = false;
             var pokemon = $.extend({}, vm.unit);
+            vm.unit.date_caught = dateToString(vm.unit.date_caught)
             $http
                 .put('/pokemons/'+vm.unit.pokemon_id, pokemon)
                 .then(response => {
                     console.log('Success in editing pokemon');
-                    console.log(response.data);
                     for (let result of vm.results) {
                         result.data = result.data.map(pokemon => {
-                            if (pokemon.pokemon_id === vm.unit.pokemon_id) {
-                                pokemon = response.data;
+                            if (pokemon.pokemon_id == vm.unit.pokemon_id) {
+                                pokemon = vm.unit;
                             }
                             return pokemon;
                         });
                     }
                 }, response => {
                     console.log('Error in editing pokemon');
-                    
                 });
         }
 
+
+        function editPokemonStop() {
+            vm.editing = false;
+        }
+        
         function editPokemon() {
             for (let key in vm.unit) {
                 if (vm.unit[key] != null) {
@@ -64,7 +113,6 @@
                     }
                     if (new Date(vm.unit[key]).toString() !== 'Invalid Date') {
                         vm.unit[key] = new Date(vm.unit[key]);
-                        console.log('MADE DATE');
                     }
                 }
             }
@@ -73,7 +121,16 @@
 
         function openModal(unit) {
             vm.unit = $.extend({}, unit);
-            $('#modal-'+vm.searchType).modal('show');
+            setTimeout(function() {
+                $('#modal-'+vm.searchType)
+                    .modal('setting', {
+                        closable: false,
+                        detachable: false,
+                        observeChanges: true,
+                        duration: 300,
+                    })
+                    .modal('show');
+            }, 1);
         }
 
         function activateTab(key) {
@@ -104,12 +161,14 @@
             return 'None';
         }
 
-        function search() {
-
+        function search(e) {
+            e.preventDefault();
             if (!vm.category) {
-                vm.searchError = 'Please select something';
+                vm.searchError = 'Please select a category';
                 return;
             }
+
+            if (vm.searching) return;
 
 
             vm.results = [];
@@ -124,7 +183,6 @@
                     }).filter(input => {
                         return input !== 'null';
                     });
-                    var results = [];
                     for (let data of response.data) {
                         var typeFound = false;
                         for (let key in data) {
@@ -141,15 +199,16 @@
                                         }
                                         var field = snakeToEng(key);
                                         var found = false;
-                                        for (let result of results) {
+                                        for (let result of vm.results) {
                                             if (result && result.key === key) {
+                                                console.log('pushing data: '+data);
                                                 result.data.push(data);
                                                 found = true;
                                                 break;
                                             }
                                         }
                                         if (!found) {
-                                            results.push({
+                                            vm.results.push({
                                                 key: key,
                                                 field: field,
                                                 data: [data]
@@ -164,10 +223,11 @@
                             if (key === 'prestige') vm.searchType = 'gym';
                         }
                     }
-                    vm.results = results;
                     console.log(vm.results);
                     vm.searching = false;
-                    
+                    setTimeout(function() {
+                        activateTab(vm.results[0].key);
+                    }, 1);
 
 
                     console.log('Success in search');
@@ -176,5 +236,15 @@
                 });
         }
     }
+
+    function dateToString(date) {
+        var string = '';
+        string += date.getFullYear() + '-';
+        if (date.getMonth() < 11) string += '0';
+        string += (date.getMonth()+1) + '-';        
+        if (date.getDate() < 10) string += '0';
+        string += date.getDate();
+        return string;
+    }    
 
 })();
