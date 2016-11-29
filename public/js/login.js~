@@ -1,0 +1,37 @@
+$('select.dropdown')
+  .dropdown()
+;
+
+$('.ui.form')
+  .form({
+    fields: {
+      sex: {
+        identifier: 'select sex',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Enter sex'
+          }
+        ]
+      },
+      name: {
+        identifier: 'select sex',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Enter sex'
+          }
+        ]
+      },
+      username: {
+        identifier: 'select sex',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Enter sex'
+          }
+        ]
+      },
+    }
+  })
+;
