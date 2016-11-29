@@ -1,0 +1,35 @@
+#fab-user {
+	position: fixed;
+	z-index: 100vw;
+	left: 90vw;
+	top: 55vh;
+	box-shadow: 0px 2px 5px gray;
+	display: none;
+}
+
+#fab-pokemon {
+	position: fixed;
+	z-index: 100vw;
+	left: 90vw;
+	top: 65vh;
+	box-shadow: 0px 2px 5px gray;
+	display: none;
+}
+
+#fab-gym {
+	position: fixed;
+	z-index: 100vw;
+	left: 90vw;
+	top: 75vh;
+	box-shadow: 0px 2px 5px gray;
+	display: none;
+}
+
+#fab-add {
+	position: fixed;
+	z-index: 100vw;
+	left: 90vw;
+	top: 85vh;
+	box-shadow: 0px 2px 5px gray;
+
+}

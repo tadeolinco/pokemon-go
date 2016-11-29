@@ -83,7 +83,28 @@
 <!-- MODAL -->
 <modal-pokemon></modal-pokemon>
 
+<!-- FAB BUTTONS-->
+    <button id="fab-user" class="circular huge ui red icon button">
+        <i class="user icon"></i>
+    </button>
+    
+    <button id="fab-pokemon" class="circular huge ui blue icon button">
+        <i class="github alternate icon"></i>
+    </button> 
+
+    <button id="fab-gym" class="circular huge ui green icon button">
+        <i class="building outline icon"></i>
+    </button>
+
+    <button id="fab-add" class="circular huge ui yellow icon button">
+        <i class="plus icon"></i>
+    </button>   
+
 <script>
+
+    $('.special.card').on('ready', '.image', function() {
+        $(this).dimmer({});
+    });
 
     $('#search-by-select').dropdown();
 
@@ -103,4 +124,18 @@
       })
     ;
 
+
+    $('#fab-add').click(function() {
+        $(this).transition({
+        animation  : 'scale',
+        duration   : '0.3s',
+        });
+    })
+
+    $('#fab-add').click(function() {
+        $('#fab-user').show();
+        $('#fab-pokemon').show();
+        $('#fab-gym').show();
+    });
+        
 </script>
