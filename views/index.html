@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="app" ng-cloak>
 <head>
     <title>Pokemon Go!</title>
     <link rel="stylesheet" type="text/css" href="/bower_components/semantic/dist/semantic.min.css">
@@ -16,7 +16,7 @@
 					</a>
 					<a ng-click="nav.activateLink(navItem.link)" class="yellow item link-{{navItem.text}}" ng-repeat="navItem in nav.navLinks" href="/#{{ navItem.link}}">{{ navItem.text }}</a>
 					<div class="right menu">
-						<a class="item">Logout</a>
+						<a class="item" ng-click="nav.logoutUser()">Logout</a>
 				  	</div>
 				</div>
 			</div>

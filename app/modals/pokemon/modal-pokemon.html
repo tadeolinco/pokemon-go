@@ -1,5 +1,4 @@
 <div class="ui modal" id="modal-pokemon">
-    <i class="close icon"></i>
     <div class="header">
         Pokemon
     </div>
@@ -108,14 +107,41 @@
     </div>
     <div class="actions">
         <div ng-if="!main.editing">
+            <div class="ui red right labeled icon button" ng-click="main.deletePokemon()">Delete
+                <i class="trash icon"></i>
+            </div>
             <div class="ui blue right labeled icon button" ng-click="main.editPokemon()">Edit
                 <i class="edit icon"></i></div>
-            <div class="ui black cancel button">Cancel</div>
+            <div class="ui black button" ng-click="main.viewPokemonStop()">Cancel</div>
         </div>
         <div ng-if="main.editing">
             <div class="ui blue right labeled icon button" ng-click="main.savePokemon()">Save
                 <i class="edit icon"></i></div>
-            <div class="ui black cancel button">Cancel</div>
+            <div class="ui black button" ng-click="main.editPokemonStop()">Cancel</div>
+        </div>
+    </div>
+</div>
+
+<div class="ui basic modal" id="pokemon-delete-confirm">
+    <div class="header">
+        Delete Pokemon
+    </div>
+    <div class="image content middle aligned">
+        <div class="image">
+            <i class="trash icon"></i>
+        </div>
+        <div class="description">
+            <p>Are you sure you want to delete this pokemon? :(</p>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui red basic inverted button" ng-click="main.deletePokemonConfirm(false)">
+            <i class="remove icon"></i>
+            No
+        </div>
+        <div class="ui green basic inverted button" ng-click="main.deletePokemonConfirm(true)">
+            <i class="checkmark icon"></i>
+            Yes
         </div>
     </div>
 </div>

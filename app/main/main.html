@@ -1,5 +1,5 @@
 <div class="ui grid centered">
-    <form class="row ui form">
+    <form class="row ui form" ng-submit="main.search($event)">
         <div class="five wide column">
             <div class="field">
                 <select class="ui dropdown" ng-model="main.category" id="search-by-select" name="select-by">
@@ -15,7 +15,7 @@
             <input type="text" ng-model="main.input" placeholder="Enter text">
         </div>
         <div class="three wide column">
-            <button id="search-button" class="ui fluid yellow button" type="submit" ng-click="main.search()">Search</button>
+            <button id="search-button" class="ui fluid yellow button" type="submit">Search</button>
         </div>
     </form>
 </div>

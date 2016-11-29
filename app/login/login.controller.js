@@ -5,14 +5,15 @@
         .module('app')
         .controller('loginController', loginController);
 
-    function loginController($http, $location) {
+    function loginController($http) {
         var vm = this;
         vm.username = '';
         vm.password = '';
 
         vm.loginUser = loginUser;
 
-        function loginUser() {
+        function loginUser(e) {
+            e.preventDefault();
             var credentials = {
                 username: vm.username,
                 password: vm.password

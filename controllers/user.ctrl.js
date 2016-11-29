@@ -55,7 +55,7 @@ exports.loginUser = (req, res) => {
 /* [POST] LOGS USER OUT */
 exports.logoutUser = (req, res) => {
     delete req.session.username;
-    res.redirect('/login');
+    res.json({ redirect: '/login' });
 }
 
 /* [PUT] USER */

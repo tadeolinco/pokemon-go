@@ -30,8 +30,53 @@
         vm.activateTab = activateTab;
         vm.snakeToEng = snakeToEng;
         vm.isNone = isNone;
+
+        vm.viewPokemonStop = viewPokemonStop;
         vm.editPokemon = editPokemon;
+        vm.editPokemonStop = editPokemonStop;
         vm.savePokemon = savePokemon;
+        vm.deletePokemon = deletePokemon;
+        vm.deletePokemonConfirm = deletePokemonConfirm;
+
+        function viewPokemonStop() {
+            $('#modal-'+vm.searchType).modal('hide');
+        }
+
+        function deletePokemonConfirm(confirm) {
+            if (confirm) {
+                $('#pokemon-delete-confirm').modal('hide');
+                for (let result of vm.results) {
+                    result.data = result.data.filter(pokemon => {
+                        return pokemon.pokemon_id !== vm.unit.pokemon_id;
+                    });
+                }
+            } else {
+                setTimeout(function() {
+                    $('#modal-'+vm.searchType)
+                        .modal('setting', {
+                            closable: false,
+                            detachable: false,
+                            observeChanges: true,
+                            duration: 300,
+                        })
+                        .modal('show');
+                }, 1);
+            }
+
+        }
+
+        function deletePokemon() {
+            setTimeout(function() {
+                $('#pokemon-delete-confirm')
+                    .modal('setting', {
+                        closable: false,
+                        detachable: false,
+                        observeChanges: true,
+                        duration: 300,
+                    })
+                    .modal('show');
+            }, 1);
+        }
 
         function savePokemon() {
             vm.editing = false;
@@ -55,6 +100,11 @@
                 });
         }
 
+
+        function editPokemonStop() {
+            vm.editing = false;
+        }
+        
         function editPokemon() {
             for (let key in vm.unit) {
                 if (vm.unit[key] != null) {
@@ -64,7 +114,6 @@
                     }
                     if (new Date(vm.unit[key]).toString() !== 'Invalid Date') {
                         vm.unit[key] = new Date(vm.unit[key]);
-                        console.log('MADE DATE');
                     }
                 }
             }
@@ -76,9 +125,10 @@
             setTimeout(function() {
                 $('#modal-'+vm.searchType)
                     .modal('setting', {
-                        closable: true,
+                        closable: false,
                         detachable: false,
                         observeChanges: true,
+                        duration: 300,
                     })
                     .modal('show');
             }, 1);
@@ -112,8 +162,8 @@
             return 'None';
         }
 
-        function search() {
-
+        function search(e) {
+            e.preventDefault();
             if (!vm.category) {
                 vm.searchError = 'Please select a category';
                 return;
@@ -132,7 +182,6 @@
                     }).filter(input => {
                         return input !== 'null';
                     });
-                    var results = [];
                     for (let data of response.data) {
                         var typeFound = false;
                         for (let key in data) {
@@ -149,7 +198,7 @@
                                         }
                                         var field = snakeToEng(key);
                                         var found = false;
-                                        for (let result of results) {
+                                        for (let result of vm.results) {
                                             if (result && result.key === key) {
                                                 result.data.push(data);
                                                 found = true;
@@ -157,7 +206,7 @@
                                             }
                                         }
                                         if (!found) {
-                                            results.push({
+                                            vm.results.push({
                                                 key: key,
                                                 field: field,
                                                 data: [data]
@@ -172,10 +221,11 @@
                             if (key === 'prestige') vm.searchType = 'gym';
                         }
                     }
-                    vm.results = results;
                     console.log(vm.results);
                     vm.searching = false;
-                    
+                    setTimeout(function() {
+                        activateTab(vm.results[0].key);
+                    }, 1);
 
 
                     console.log('Success in search');

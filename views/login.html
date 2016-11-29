@@ -27,7 +27,7 @@
 								</div>
 							</div>
 							<div class = "content">
-								<form class="ui form">
+								<form class="ui form" ng-submit="login.loginUser($event)">
 									<div class="field">
 										<div class="ui left icon input">
 											<input type="text" placeholder="Username" ng-model = "login.username">
@@ -40,7 +40,7 @@
 												<i class="lock icon"></i>
 										</div>
 									</div>
-									<button class="ui blue animated button" tabindex="0" type="submit" ng-click="login.loginUser()">
+									<button class="ui blue animated button" tabindex="0" type="submit">
 										<div class="visible content">Login</div>
 										<div class="hidden content">
 											<i class="right arrow icon"></i>
