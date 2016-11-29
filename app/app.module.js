@@ -12,5 +12,6 @@ require('./app.routes');
 
 /* CONTROLLERS */
 require('./login/register.controller');
+require('./nav/nav.controller');
 require('./login/login.controller');
 require('./main/main.controller');

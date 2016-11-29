@@ -27,7 +27,7 @@ exports.create = (pokemon, cb) => {
 /* Updates pokemon given by pokemon_id */
 exports.update = (pokemon, cb) => {
 
-    db.query('UPDATE pokemon SET name=:name, cp=:cp, type1=:type1, type2=:type2, level=:level, date_caught=:date_caught, user_id=:user_id, gym_id=:gym_id WHERE pokemon_id=:pokemon_id', pokemon, (err, rows) => {
+    db.query('UPDATE pokemon SET entity=:entity, name=:name, cp=:cp, type1=:type1, type2=:type2, level=:level, date_caught=:date_caught, user_id=:user_id, gym_id=:gym_id WHERE pokemon_id=:pokemon_id', pokemon, (err, rows) => {
         if (err) throw err;
         return cb(pokemon);
     });
