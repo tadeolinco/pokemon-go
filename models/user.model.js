@@ -33,7 +33,7 @@ exports.findOne = (user_id, cb) => {
     
 /* Posts the user, returning its user_id */
 exports.create = (user, cb) => {
-    db.query('INSERT INTO user VALUES(0, :name, :gender, :country, :date_registered, :number_of_gyms_battled, :team, :level, :username, :password)', user, (err, rows) => {
+    db.query('INSERT INTO user VALUES(0, :username, :password, :name, :gender, :country, :date_registered, :number_of_gyms_battled, :team, :level)', user, (err, rows) => {
         if (err) throw err;
         return cb(db.lastInsertId());
     });

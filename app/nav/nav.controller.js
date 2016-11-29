@@ -17,6 +17,10 @@
 		vm.activateLink = activateLink;
 		vm.logoutUser = logoutUser;
 
+		setTimeout(function() {
+			activateLink('/');
+		}, 1);
+
 		function activateLink(link) {
 			for (let navItem of vm.navLinks) {
 				if (navItem.link === link) {

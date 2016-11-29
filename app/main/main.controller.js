@@ -88,15 +88,14 @@
                     console.log('Success in editing pokemon');
                     for (let result of vm.results) {
                         result.data = result.data.map(pokemon => {
-                            if (pokemon.pokemon_id === vm.unit.pokemon_id) {
-                                pokemon = response.data;
+                            if (pokemon.pokemon_id == vm.unit.pokemon_id) {
+                                pokemon = vm.unit;
                             }
                             return pokemon;
                         });
                     }
                 }, response => {
                     console.log('Error in editing pokemon');
-                    
                 });
         }
 
@@ -169,6 +168,8 @@
                 return;
             }
 
+            if (vm.searching) return;
+
 
             vm.results = [];
             vm.searching = true;
@@ -200,6 +201,7 @@
                                         var found = false;
                                         for (let result of vm.results) {
                                             if (result && result.key === key) {
+                                                console.log('pushing data: '+data);
                                                 result.data.push(data);
                                                 found = true;
                                                 break;

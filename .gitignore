@@ -3,5 +3,5 @@ bower_components
 public/bundle.js
 *.log
 ~*
-*~
+*/**/*~
 .vscode
