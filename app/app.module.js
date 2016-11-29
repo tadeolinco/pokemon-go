@@ -12,5 +12,6 @@ require('./app.routes');
 require('./modals/pokemon/modal-pokemon.directive');
 
 /* CONTROLLERS */
+require('./nav/nav.controller');
 require('./login/login.controller');
 require('./main/main.controller');
