@@ -21,7 +21,7 @@
 </div>
 <div class = "ui grid centered">
     <div class="ui top attached tabular menu">
-        <div ng-repeat="result in main.results" class="item tab-{{result.key}}"  ng-click="main.activateTab(result.key)">
+        <div ng-repeat="result in main.results" class="pointer item tab-{{result.key}}"  ng-click="main.activateTab(result.key)">
             {{result.field}}
         </div>
     </div>
@@ -34,7 +34,7 @@
         <div class="ui grid centered">
             <div class="three wide column" ng-repeat="unit in result.data | orderBy : result.key track by $index"
             ng-click="main.openModal(unit)">
-                <div class="ui fluid special card centered">
+                <div class="ui fluid special card centered pointer">
                     <div class="blurring dimmable image"> 
                         <img ng-if="unit.date_registered" class="ui image fluid" ng-src="/assets/trainers/{{main.getImage(unit)}}.png">
                         <img ng-if="unit.pokemon_id" class="ui image fluid" ng-src="/assets/pokemons/{{unit.entity}}.png">

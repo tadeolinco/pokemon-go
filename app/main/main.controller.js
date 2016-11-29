@@ -29,6 +29,7 @@
         vm.searchError = 'Search by...';
 
         vm.users = [];        
+        vm.gyms = [];
 
         vm.search = search;
         vm.openModal = openModal;
@@ -36,7 +37,6 @@
         vm.snakeToEng = snakeToEng;
         vm.isNone = isNone;
         vm.getImage = getImage;
-        vm.cardColor = cardColor;
 
         vm.viewUnitStop = viewUnitStop;
         vm.editUnit = editUnit;
@@ -51,11 +51,20 @@
             $http
                 .get('/users')
                 .then(response => {
-                    console.log('success init');
+                    console.log('success init users');
                     vm.users = response.data;
                 }, response => {
-                    console.log('error init');
+                    console.log('error init users');
                 });
+            $http
+                .get('/gyms')
+                .then(response => {
+                    console.log('success init gyms');
+                    vm.gyms = response.data;
+                }, response => {
+                    console.log('error init gyms');
+                });
+            
         }
 
         function viewUnitStop() {

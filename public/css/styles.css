@@ -19,3 +19,7 @@ body {
     max-height: 100vh;
     
 }
+
+.pointer {
+    cursor: pointer;
+}

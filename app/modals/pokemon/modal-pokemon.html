@@ -62,7 +62,7 @@
                         <td class="bold">Type2</td>
                         <td class="field">
                             <select class="ui dropdown" ng-model="main.unit.type2">
-                                <option value="NULL">NULL</option>
+                                <option value="NULL">None</option>
                                 <option ng-repeat="type in main.types" 
                                         value="{{type}}">
                                         <span class="capitalize">{{type}}</span>
@@ -96,7 +96,13 @@
                     <tr>
                         <td class="bold">Gym Id</td>
                         <td class="field">
-                            <input type="number" ng-model="main.unit.gym_id">
+                            <select class="ui dropdown" ng-model="main.unit.gym_id">
+                                <option value="NULL">None</option>
+                                <option ng-repeat="gym in main.gyms" 
+                                        value="{{gym.gym_id}}">
+                                        <span>{{gym.gym_id}}</span>
+                                </option>
+                            </select>
                         </td>
                     </tr>
                 </tbody>
