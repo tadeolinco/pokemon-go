@@ -10,7 +10,7 @@ router.post('/logout',  UserCtrl.logoutUser);
 router.post('/register',UserCtrl.registerUser);
 
 /* AUTHENTICATION */
-router.use(auth);
+//router.use(auth);
 
 router.get('/', ViewCtrl.index);
 router.use('/', require('./user.route'));

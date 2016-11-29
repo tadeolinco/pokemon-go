@@ -36,11 +36,11 @@
         function savePokemon() {
             vm.editing = false;
             var pokemon = $.extend({}, vm.unit);
+            vm.unit.date_caught = dateToString(vm.unit.date_caught)
             $http
                 .put('/pokemons/'+vm.unit.pokemon_id, pokemon)
                 .then(response => {
                     console.log('Success in editing pokemon');
-                    console.log(response.data);
                     for (let result of vm.results) {
                         result.data = result.data.map(pokemon => {
                             if (pokemon.pokemon_id === vm.unit.pokemon_id) {
@@ -73,7 +73,15 @@
 
         function openModal(unit) {
             vm.unit = $.extend({}, unit);
-            $('#modal-'+vm.searchType).modal('show');
+            setTimeout(function() {
+                $('#modal-'+vm.searchType)
+                    .modal('setting', {
+                        closable: true,
+                        detachable: false,
+                        observeChanges: true,
+                    })
+                    .modal('show');
+            }, 1);
         }
 
         function activateTab(key) {
@@ -176,5 +184,15 @@
                 });
         }
     }
+
+    function dateToString(date) {
+        var string = '';
+        string += date.getFullYear() + '-';
+        if (date.getMonth() < 11) string += '0';
+        string += (date.getMonth()+1) + '-';        
+        if (date.getDate() < 10) string += '0';
+        string += date.getDate();
+        return string;
+    }    
 
 })();

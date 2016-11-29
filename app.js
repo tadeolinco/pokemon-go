@@ -3,6 +3,7 @@ const path        = require('path');
 const express     = require('express');
 const session     = require('express-session');
 const bodyParser  = require('body-parser');
+const morgan      = require('morgan');
 const app         = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -11,6 +12,8 @@ app.use(express.static(path.join(__dirname,'/public')));
 app.use('/bower_components', 
     express.static(path.join(__dirname, '/bower_components')));
 app.use('/app', express.static(path.join(__dirname, '/app')));
+
+app.use(morgan('dev'));
 
 app.use(session({
     secret: 'sir regi still da best',
