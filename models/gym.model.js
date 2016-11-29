@@ -8,9 +8,9 @@ exports.findAll = (cb) => {
     });
 }
 
-exports.findChallengedByUser = (user_id, cb) => {
-    db.query('SELECT gym.gym_id, name, country, number_of_users_battled, team, prestige FROM gym, challenges WHERE challenges.user_id = ? and challenges.gym_id = gym.gym_id'
-, [user_id], (err, rows) => {
+exports.findChallengedByUser = (username, cb) => {
+    db.query('SELECT gym.gym_id, name, country, number_of_users_battled, team, prestige FROM gym, challenges WHERE challenges.username = ? and challenges.gym_id = gym.gym_id'
+, [username], (err, rows) => {
         if (err) throw err;
         return cb(rows);
     });

@@ -2,7 +2,7 @@
     <form class="row ui form" ng-submit="main.search($event)">
         <div class="five wide column">
             <div class="field">
-                <select class="ui dropdown" ng-model="main.category" id="search-by-select" name="select-by">
+                <select class="ui dropdown" ng-model="main.searchCategory" id="search-by-select" name="select-by">
                     <option value="">{{main.searchError}}</option>
                     <option ng-repeat="option in main.options" 
                             value="{{option.value}}">
@@ -35,38 +35,30 @@
             <div class="three wide column" ng-repeat="unit in result.data | orderBy : result.key track by $index"
             ng-click="main.openModal(unit)">
                 <div class="ui fluid special card centered">
-                    <div class="blurring dimmable image">
-                        <div class="ui dimmer">
-                            <div class="content">
-                                <div class="center">
-                                    <div class="ui inverted button">View/Edit</div>
-                                </div>
-                                <div class="center">
-                                    <div class="ui inverted button">Delete</div>
-                                </div>
-                            </div>
-                        </div>  
-                        <img class="ui image fluid" ng-src="/assets/pokemons/{{unit.entity}}.png">
+                    <div class="blurring dimmable image"> 
+                        <img ng-if="unit.date_registered" class="ui image fluid" ng-src="/assets/trainers/{{main.getImage(unit)}}.png">
+                        <img ng-if="unit.pokemon_id" class="ui image fluid" ng-src="/assets/pokemons/{{unit.entity}}.png">
+                        <img ng-if="unit.gym_id" class="ui image fluid" ng-src="/assets/gyms/{{main.getImage(unit)}}.png">
                     </div>
                     <div class="content">
                         <div class="header">
                             {{unit.name}}
                         </div>
                         <div class="meta">
-                            <div ng-if="unit.username">User</div>
-                            <div ng-if="unit.pokemon_id">Pokemon</div>
+                            <div ng-if="unit.date_registered">{{unit.username}}</div>
+                            <div ng-if="unit.pokemon_id" class="capitalize">{{unit.entity}}</div>
                             <div ng-if="unit.prestige">Gym</div>
                         </div>
                     </div>
                     <div class="extra content">
                         <i class="user icon"></i>
-                            <span ng-if="unit.username">
+                            <span ng-if="unit.date_registered">
                                 <span ng-if="unit.team !== 'NULL'" class="capitalize">Team {{unit.team}}</span>
                                 <span ng-if="unit.team === 'NULL'">No team</span>
                             </span>
-                            <span ng-if="!unit.username">
+                            <span ng-if="!unit.date_registered">
                                 Owned by
-                                <span ng-if="unit.pokemon_id">User #{{unit.user_id}}</span>
+                                <span ng-if="unit.pokemon_id">{{unit.trainer}}</span>
                                 <span ng-if="unit.prestige">
                                     <span ng-if="unit.team === 'NULL'">no team</span>
                                     <span ng-if="unit.team !== 'NULL'" class="capitalize">Team {{unit.team}}</span>
@@ -82,6 +74,8 @@
 
 <!-- MODAL -->
 <modal-pokemon></modal-pokemon>
+<modal-user></modal-user>
+<modal-gym></modal-gym>
 
 <!-- FAB BUTTONS-->
     <button id="fab-user" class="circular huge ui red icon button">
