@@ -203,17 +203,34 @@
         </div>
     </div>
 
+<!-- FAB BUTTONS-->
+    <button id="fab-user" class="circular huge ui red icon button">
+        <i class="user icon"></i>
+    </button>
+    
+    <button id="fab-pokemon" class="circular huge ui blue icon button">
+        <i class="github alternate icon"></i>
+    </button> 
+
+    <button id="fab-gym" class="circular huge ui green icon button">
+        <i class="building outline icon"></i>
+    </button>
+
+    <button id="fab-add" class="circular huge ui yellow icon button">
+        <i class="plus icon"></i>
+    </button>   
+
 <script>
     $('.ui.modal').modal({
         closable  : false,
         detachable : false
     });
 
-<<<<<<< HEAD
+
     $('.special.card').on('ready', '.image', function() {
         $(this).dimmer({});
     });
-=======
+
     $('#search-by-select').dropdown();
 
     $('.ui.form')
@@ -231,6 +248,22 @@
         }
       })
     ;
->>>>>>> b8d440358c655edfcf71f01992c75b2925dc4a05
+
+    $('#fab-add').click(function() {
+        $(this).transition({
+        animation  : 'scale',
+        duration   : '0.3s',
+        });
+    })
+
+    $('#fab-add').click(function() {
+        $('#fab-user').hide().fadeIn('slow');
+        $('#fab-pokemon').hide().fadeIn('slow');
+        $('#fab-gym').hide().fadeIn('slow');
+    });
+        
+    
+      
+      
 
 </script>
