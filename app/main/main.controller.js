@@ -47,6 +47,9 @@
         vm.deleteUnit = deleteUnit;
         vm.deleteUnitConfirm = deleteUnitConfirm;
 
+        vm.flagForAdd = 0; 
+        vm.enableAddButton = enableAddButton;
+
         initialize();
 
         function initialize() {
@@ -66,6 +69,36 @@
                 }, response => {
                     console.log('error init gyms');
                 });
+            
+        }
+
+        function enableAddButton() {
+            
+            if (vm.flagForAdd == 0) {
+                $('.fab-three')
+                    .transition({
+                        animation   : 'scale',
+                        reverse     : 'auto',
+                        interval    : 200
+                    })
+                ;
+            
+                vm.flagForAdd = 1;
+                return;
+            }
+
+            if (vm.flagForAdd == 1) {
+                $('.fab-three')
+                    .transition({
+                        animation   : 'scale',
+                        reverse     : 'auto',
+                        interval    : 200
+                    })
+                ;
+            
+                vm.flagForAdd = 0;
+                return;
+            }
             
         }
 
@@ -338,7 +371,7 @@
         vm.openAddModal = openAddModal;
         vm.addToDB = addToDB;
         vm.addStop = addStop;
-
+        
         function addToDB(param) {
             if(param === "pokemon") {
                 var pokemon = {

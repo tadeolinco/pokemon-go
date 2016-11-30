@@ -90,19 +90,19 @@
 
 
 <!-- FAB BUTTONS-->
-    <button id="fab-user" class="circular huge ui red icon button" ng-click = "main.openAddModal('user')">
-        <i class="user icon"></i>
-    </button>
-    
-    <button id="fab-pokemon" class="circular huge ui blue icon button" ng-click = "main.getUsers();main.getGyms();main.openAddModal('pokemon')">
-        <i class="github alternate icon"></i>
-    </button> 
-
-    <button id="fab-gym" class="circular huge ui green icon button" ng-click = "main.openAddModal('gym')">
+    <button id="fab-gym" class="circular huge ui green icon button fab-three" ng-click="main.openAddModal('gym')">
         <i class="building outline icon"></i>
     </button>
 
-    <button id="fab-add" class="circular huge ui yellow icon button">
+    <button id="fab-pokemon" class="circular huge ui blue icon button fab-three" ng-click="main.openAddModal('pokemon')">
+        <i class="github alternate icon"></i>
+    </button>
+
+    <button id="fab-user" class="circular huge ui red icon button fab-three" ng-click="main.openAddModal('user')">
+        <i class="user icon"></i>
+    </button>
+    
+    <button id="fab-add" class="circular huge ui yellow icon button" ng-click="main.enableAddButton()">
         <i class="plus icon"></i>
     </button>   
 
@@ -129,34 +129,4 @@
       })
     ;
 
-
-    $('#fab-add').click(function() {
-        $(this).transition({
-        animation  : 'scale',
-        duration   : '0.3s',
-        });
-    })
-
-    $('#fab-add').click(function() {
-        $('#fab-user').show();
-        $('#fab-pokemon').show();
-        $('#fab-gym').show();
-    });
-
-    //ADD POKEMON MODAL FORM VALIDATION
-    // $('.ui.form')
-    //   .form({
-    //     fields: {
-    //       name: {
-    //         identifier: 'select-by',
-    //         rules: [
-    //           {
-    //             type   : 'empty',
-    //             prompt : 'Please select something'
-    //           }
-    //         ]
-    //       }
-    //     }
-    //   })
-    // ;            
 </script>
