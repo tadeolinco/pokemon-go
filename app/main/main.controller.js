@@ -301,47 +301,23 @@
                 });
         }
 
-        /************************************************************
-        ADD FUNCTIONS
-        ************************************************************/
-        vm.country_list = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyz Republic","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","St. Lucia","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia","Turkey","Turkmenistan","Turks &amp; Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","Uruguay","Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
-
-        //pokemon attributes
-        vm.add_name = '';
-        vm.add_entity = '';                
-        vm.add_cp = '';
-        vm.add_type1 = '';
-        vm.add_type2 = '';
-        vm.add_level = '';
-        vm.add_datecaught = '';
-        vm.add_username = '';
-        vm.add_gymid = '';
-
-        //user attributes
-        vm.addu_username  = '';
-        vm.addu_password  = '';
-        vm.addu_name  = '';
-        vm.addu_gender  = '';
-        vm.addu_country  = '';
-        vm.addu_dateregistered  = '';
-        vm.addu_numberofgymsbattled  = '';
-        vm.addu_team  = '';
-        vm.addu_level  = '';
-
-        //gym attributes
-        vm.addg_name = '';
-        vm.addg_country = '';
-        vm.addg_numberofusersbattled = '';
-        vm.addg_team = '';
-        vm.addg_prestige = '';
+        //ADD FUNCTIONS
+        
+        //flags
+        var add_valid = true;
+        vm.add_success;
+        vm.add_error;
+        vm.add_duplicate;
 
         vm.openAddModal = openAddModal;
         vm.addToDB = addToDB;
         vm.addStop = addStop;
-        vm.getGyms = getGyms;
-        vm.getUsers = getUsers;
 
         function addToDB(param) {
+            add_valid = true;
+            vm.add_success = false;
+            vm.add_error = false;
+            vm.add_duplicate = false;      
             if(param === "pokemon") {
                 var pokemon = {
                     name: vm.add_name, 
@@ -354,15 +330,28 @@
                     trainer: vm.add_username,
                     gym_id: vm.add_gymid
                 };
-             
-                $http
-                    .post('/pokemons', pokemon)
-                    .then(response => { // success
-                        console.log('Successfully added pokemon!');
-                        $('#addForm').form('clear');
-                    }, response => { // error      
-                        console.log('Error in adding pokemon method');
-                    });
+
+                for(var key in pokemon){
+                    if(pokemon[key] === ""){
+                        add_valid = false;
+                    };
+                }
+                if(add_valid){
+                    $http
+                        .post('/pokemons', pokemon)
+                        .then(response => { // success
+                            vm.add_success = true; 
+                            console.log('Successfully added pokemon!');
+                            fieldDefaults(param);
+                            addStop(param);
+                            openAddModal('confirm');                            
+                        }, response => { // error
+                            vm.add_error = true;      
+                            console.log('Error in adding pokemon method');
+                        });
+                }else{
+                    vm.add_error = true;      
+                }
             }else if(param === "user") {
                 var user = {
                     username: vm.addu_username,
@@ -375,15 +364,35 @@
                     team: vm.addu_team,
                     level: vm.addu_level
                 };
-             
-                $http
-                    .post('/register', user)
-                    .then(response => { // success
-                        console.log('Successfully added user!');
-                        $('#addForm').form('clear');
-                    }, response => { // error      
-                        console.log('Error in adding user method');
-                    });
+
+                for(var key in user){
+                    if(user[key] === ""){
+                        add_valid = false;
+                    };
+                }
+                if(add_valid){
+                    $http
+                        .post('/register', user)
+                        .then(response => { // success
+                            console.log(response.data);
+                            if (response.data === "NULL") {
+                                vm.add_duplicate = true;
+                                console.log("Duplicate username");
+                            }else {   
+                                console.log('Successfully registered!');
+                                vm.add_success = true;                                
+                                fieldDefaults(param);
+                                addStop(param);
+                                openAddModal('confirm');
+                            }
+                        }, response => { // error      
+                            vm.add_error = true;
+                            console.log('Error in register method');
+                        });
+                }else{
+                    vm.add_error = true;
+                }
+
             }else if(param === "gym") {
                 var gym = {
                     name: vm.addg_name,
@@ -392,20 +401,34 @@
                     team: vm.addg_team,
                     prestige: vm.addg_prestige
                 };
-             
-                $http
-                    .post('/gyms', gym)
-                    .then(response => { // success
-                        console.log('Successfully added gym!');
-                        $('#addForm').form('clear');
-                    }, response => { // error      
-                        console.log('Error in adding gym method');
-                    });
-            }
 
+                for(var key in gym){
+                    if(gym[key] === ""){
+                        add_valid = false;
+                    };
+                }
+                
+                if(add_valid){
+                    $http
+                        .post('/gyms', gym)
+                        .then(response => { // success
+                            vm.add_success = true;   
+                            console.log('Successfully added gym!');
+                            fieldDefaults(param);
+                            addStop(param);
+                            openAddModal('confirm');                            
+                        }, response => { // error  
+                            vm.add_error = true;
+                            console.log('Error in adding gym method');
+                        });
+                }else{
+                    vm.add_error = true;
+                }
+            }
         }
 
         function openAddModal(param) {
+            fieldDefaults(param);
             setTimeout(function() {
                 $('#modal-add-' + param)
                     .modal('setting', {
@@ -418,9 +441,46 @@
             }, 1);
         }
 
+        function fieldDefaults(param) {
+            if (param === "pokemon"){
+                //pokemon attributes
+                vm.add_name = '';
+                vm.add_entity = vm.entities[0];                
+                vm.add_cp = '';
+                vm.add_type1 = vm.types[0];
+                vm.add_type2 = 'NULL';
+                vm.add_level = '';
+                vm.add_datecaught = '';
+                vm.add_username = vm.users[1].username;
+                vm.add_gymid = vm.gyms[0].gym_id;
+
+            }else if(param === "user") {
+                //user attributes
+                vm.addu_username  = '';
+                vm.addu_password  = '';
+                vm.addu_name  = '';
+                vm.addu_gender  = 'Male';
+                vm.addu_country  = vm.country_list[0];
+                vm.addu_dateregistered  = '';
+                vm.addu_numberofgymsbattled  = '';
+                vm.addu_team  = 'NULL';
+                vm.addu_level  = '';
+            }else if(param === "gym"){
+                //gym attributes
+                vm.addg_name = '';
+                vm.addg_country = vm.country_list[0];
+                vm.addg_numberofusersbattled = '';
+                vm.addg_team = 'NULL';
+                vm.addg_prestige = '';
+            }
+        }
+
         function addStop(param) {
             $('#modal-add-' + param).modal('hide');
-            $('#addForm').form('clear');
+            add_valid = true;
+            vm.add_success = false;
+            vm.add_error = false;
+            vm.add_duplicate = false;             
         }
 
         function dateToString(date) {

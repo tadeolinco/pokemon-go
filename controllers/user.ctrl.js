@@ -27,11 +27,16 @@ exports.getChallenging = (req, res) => {
 
 /* [POST] USER */
 exports.registerUser = (req, res) => {
-    var user = req.body;
-    user.password = crypt.encrypt(user.password);
-
-    User.create(user, newUser => {
-        return res.json(newUser);
+    var input_user = req.body;
+    input_user.password = crypt.encrypt(input_user.password);
+    User.findOne(input_user.username, user=>{
+        if (user === undefined){
+            User.create(input_user, newUser => {
+                return res.json(newUser);
+            });
+        }else{
+            return res.send("NULL");
+        }
     });
 };
 

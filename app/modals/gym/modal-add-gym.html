@@ -3,7 +3,7 @@
         Add Gym
     </div>
     <div class="image content ui grid" style="background: transparent;">
-        <div class="description eight wide centered column">
+        <div class="description sixteen wide centered column">
             <table class="ui celled compact table">
                 <thead>
                     <tr>
@@ -22,7 +22,6 @@
                         <td class="bold">Country</td>
                         <td class="field">
                             <select class="ui dropdown" ng-model="main.addg_country">
-                                <option value="">Country</option>
                                 <option ng-repeat="country in main.country_list" value="{{country}}">
                                     <span class="capitalize">{{country}}</span>
                                 </option>
@@ -32,14 +31,14 @@
                     <tr>
                         <td class="bold">No. Of Users Battled</td>
                         <td class="field">
-                            <input type="number" ng-model="main.addg_numberofusersbattled ">
+                            <input type="number" min="0" ng-model="main.addg_numberofusersbattled ">
                         </td>
                     </tr>                    
                     <tr>
                         <td class="bold">Team</td>
                         <td class="field">
                             <select class="ui dropdown" ng-model="main.addg_team">
-                                <option value="NULL">Null</option>
+                                <option value="NULL">No Team</option>
                                 <option value="Instinct">Instinct</option>
                                 <option value="Valor">Valor</option>
                                 <option value="Mystic">Mystic</option>
@@ -49,26 +48,43 @@
                     <tr>
                         <td class="bold">Prestige</td>
                         <td class="field">
-                            <input type="text" ng-model="main.addg_prestige">
+                            <input type="number" min="0" ng-model="main.addg_prestige">
                         </td>
                     </tr>                 
                 </tbody>
             </table>
         </div>
-        <!-- PICTURE HERE
-        <div class="eight wide column middle aligned">
-            <div class="container img-background">
-                <div class="ui image fluid">
-                    <img ng-src="/assets/pokemons/{{main.add_entity}}.png">
-                </div>
-            </div>
-        </div> -->
+        <div class = "eight wide column">
+          <div class="ui negative mini message" ng-if="main.add_error">
+            <div class="header">Add unsuccessful! Invalid Field/s</div>
+          </div>            
+        </div>
     </div>
     <div class="actions">
         <div>
             <div class="ui blue right labeled icon button" ng-click="main.addToDB('gym')">Add
                 <i class="add icon"></i></div>
             <div class="ui black button" ng-click="main.addStop('gym')">Cancel</div>
+        </div>
+    </div>
+</div>
+
+<div class="ui basic modal" id="modal-add-confirm">
+    <div class="header">
+        Gym Added
+    </div>
+    <div class="image content middle aligned">
+        <div class="image">
+            <i class="checkmark icon"></i>
+        </div>
+        <div class="description">
+            <p>Gym Successfully Added!</p>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui green basic inverted button" ng-click="main.addStop('confirm')">
+            <i class="checkmark icon"></i>
+            Confirm
         </div>
     </div>
 </div>
