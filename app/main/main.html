@@ -100,15 +100,15 @@
 
 
 <!-- FAB BUTTONS-->
-    <button id="fab-gym" class="circular huge ui green icon button fab-three" ng-click="main.openAddModal('gym')">
+    <button id="fab-gym" class="circular huge ui green icon button fab-three" ng-click="main.openAddModal('gym'); main.enableAddButton()">
         <i class="building outline icon"></i>
     </button>
 
-    <button id="fab-pokemon" class="circular huge ui blue icon button fab-three" ng-click="main.openAddModal('pokemon')">
+    <button id="fab-pokemon" class="circular huge ui blue icon button fab-three" ng-click="main.openAddModal('pokemon'); main.enableAddButton()">
         <i class="github alternate icon"></i>
     </button>
 
-    <button id="fab-user" class="circular huge ui red icon button fab-three" ng-click="main.openAddModal('user')">
+    <button id="fab-user" class="circular huge ui red icon button fab-three" ng-click="main.openAddModal('user'); main.enableAddButton()">
         <i class="user icon"></i>
     </button>
     
