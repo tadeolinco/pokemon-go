@@ -28,8 +28,18 @@
         </div>
     </div>
     <div ng-if="!main.results.length && main.category && !main.searching" class="row">
-        <div class="sixteen wide column">
-            <h1>No results :(</h1>
+        <div class="sixteen wide centered column">
+            <div class="ui error message">
+              <div class="header">
+                Your search returned no results :(
+              </div>
+              <ul class="list">
+                <li>Confirm that inputs are spelled correctly.</li>
+                <li>Confirm that you have chosen the correct category.</li>
+                <li>Try different inputs.</li>
+                <li>Try more general inputs.</li>
+              </ul>
+            </div>
         </div>
     </div>
     <div class="row" ng-if="main.searching">
