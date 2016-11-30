@@ -10,6 +10,10 @@ require('./app.routes');
 
 /* DIRECTIVES */
 require('./modals/pokemon/modal-pokemon.directive');
+require('./modals/pokemon/modal-add-pokemon.directive');
+require('./modals/pokemon/modal-add-gym.directive');
+require('./modals/pokemon/modal-add-user.directive');
+
 
 /* CONTROLLERS */
 require('./login/register.controller');

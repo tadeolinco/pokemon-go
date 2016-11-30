@@ -1,0 +1,74 @@
+<div class="ui modal" id="modal-add-gym">
+    <div class="header">
+        Add Gym
+    </div>
+    <div class="image content ui grid" style="background: transparent;">
+        <div class="description eight wide centered column">
+            <table class="ui celled compact table">
+                <thead>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody class="ui mini form" id = "addForm">
+                    <tr>
+                        <td class="bold">Name</td>
+                        <td class="field">
+                            <input type="text" ng-model="main.addg_name">
+                        </td>
+                    </tr>                
+                    <tr>
+                        <td class="bold">Country</td>
+                        <td class="field">
+                            <select class="ui dropdown" ng-model="main.addg_country">
+                                <option value="">Country</option>
+                                <option ng-repeat="country in main.country_list" value="{{country}}">
+                                    <span class="capitalize">{{country}}</span>
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bold">No. Of Users Battled</td>
+                        <td class="field">
+                            <input type="number" ng-model="main.addg_numberofusersbattled ">
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <td class="bold">Team</td>
+                        <td class="field">
+                            <select class="ui dropdown" ng-model="main.addg_team">
+                                <option value="NULL">Null</option>
+                                <option value="Instinct">Instinct</option>
+                                <option value="Valor">Valor</option>
+                                <option value="Mystic">Mystic</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Prestige</td>
+                        <td class="field">
+                            <input type="text" ng-model="main.addg_prestige">
+                        </td>
+                    </tr>                 
+                </tbody>
+            </table>
+        </div>
+        <!-- PICTURE HERE
+        <div class="eight wide column middle aligned">
+            <div class="container img-background">
+                <div class="ui image fluid">
+                    <img ng-src="/assets/pokemons/{{main.add_entity}}.png">
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <div class="actions">
+        <div>
+            <div class="ui blue right labeled icon button" ng-click="main.addToDB('gym')">Add
+                <i class="add icon"></i></div>
+            <div class="ui black button" ng-click="main.addStop('gym')">Cancel</div>
+        </div>
+    </div>
+</div>

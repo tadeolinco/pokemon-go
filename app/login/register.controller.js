@@ -27,6 +27,9 @@
         function regUser(e) {
             e.preventDefault();
             var isValid = true;
+            // var usersRegd = getUsers();
+          
+            // console.log(usersRegd);
 
             if(vm.success || vm.error){
                 vm.success = false;
@@ -37,6 +40,14 @@
                 isValid = false;
                 vm.error = true;
             } 
+
+            // usersRegd.forEach(function(users){
+            //         console.log(users.username);
+            //     if (users.username === vm.username){
+
+            //         isValid = false;
+            //     }
+            // });  
 
             var information = {
                 name: vm.name, 
@@ -50,8 +61,6 @@
                 level: 1
             };
 
-
-
             if (isValid){
                 $http
                     .post('/register', information)
@@ -63,8 +72,6 @@
                         vm.password = null;
                         vm.sex = null;
                         vm.country = null; 
-                        //$('select option:eq(0)').prop('selected', true)
-                        //$('#select-sex').prop('selectedIndex',0);   
                     }, response => { // error      
                         vm.error = true;
                         console.log('Error in register method');
@@ -73,12 +80,25 @@
                         vm.password = '';
                         vm.sex = '';
                         vm.country = '';
-
                     });
 
             }
 
         }
+
+        // function getUsers() {
+        //     $http
+        //         .get('/users')
+        //         .then(response => { // success
+        //             console.log(response.data);
+        //             return response.data;
+        //             console.log('Successfully got users!');
+        //         }, response => { // error      
+        //             console.log('Error in getting users method');
+        //             return null;
+        //         });
+        // }
+
     }
 
 })();
