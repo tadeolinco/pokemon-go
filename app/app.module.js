@@ -22,3 +22,4 @@ require('./login/register.controller');
 require('./nav/nav.controller');
 require('./login/login.controller');
 require('./main/main.controller');
+require('./report/report.controller');
