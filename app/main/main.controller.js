@@ -375,7 +375,7 @@
                             console.log('Successfully added pokemon!');
                             fieldDefaults(param);
                             addStop(param);
-                            openAddModal('confirm');                            
+                            openAddModal('pokemonconfirm');                            
                         }, response => { // error
                             vm.add_error = true;      
                             console.log('Error in adding pokemon method');
@@ -414,7 +414,7 @@
                                 vm.add_success = true;                                
                                 fieldDefaults(param);
                                 addStop(param);
-                                openAddModal('confirm');
+                                openAddModal('userconfirm');
                             }
                         }, response => { // error      
                             vm.add_error = true;
@@ -447,7 +447,7 @@
                             console.log('Successfully added gym!');
                             fieldDefaults(param);
                             addStop(param);
-                            openAddModal('confirm');                            
+                            openAddModal('gymconfirm');                            
                         }, response => { // error  
                             vm.add_error = true;
                             console.log('Error in adding gym method');

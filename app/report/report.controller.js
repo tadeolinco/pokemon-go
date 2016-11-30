@@ -32,15 +32,19 @@
         vm.results = [];
         vm.generateCountry = ''; // default
         vm.generateCategory = ''; // default
+        vm.no_result;
 
         function generate() {
             vm.results = [];
+            vm.no_result = false;
             switch(+vm.generateCategory) {
                 case ALL_USERS: getAllUsers(); break;
                 case ALL_USERS_COUNTRY: getAllUsersByCountry(); break;
                 case ALL_GYMS_COUNTRY: getAllGymsByCountry(); break;
                 case ALL_USERS_UNIQUE: getAllUsersUniquePokemon(); break;
             }
+            
+
         }
 
         function getAllUsers() {
@@ -49,6 +53,9 @@
                 .then(response => {
                     vm.results = response.data;
                     console.log('Success in getting all users');
+                    if(vm.results[0] === undefined) {
+                        vm.no_result = true;
+                    }
                 }, response => {
                     console.log('Error in getting all users');
                 });
@@ -63,6 +70,9 @@
                         return unit.country == vm.generateCountry;
                     });
                     console.log('Success in getting all users by country');
+                    if(vm.results[0] === undefined) {
+                        vm.no_result = true;
+                    }                    
                 }, response => {
                     console.log('Error in getting all users by country');
                 });
@@ -77,6 +87,9 @@
                         return unit.country == vm.generateCountry;
                     });
                     console.log('Success in getting all gyms by country');
+                    if(vm.results[0] === undefined) {
+                        vm.no_result = true;
+                    }                    
                 }, response => {
                     console.log('Error in getting all gyms by country');
                 });
@@ -113,6 +126,9 @@
                             console.log(vm.results);
                         }, response => {
                             console.log('Success in getting users');
+                            if(vm.results[0] === undefined) {
+                                vm.no_result = true;
+                            }                            
                         });
 
                 }, response => {

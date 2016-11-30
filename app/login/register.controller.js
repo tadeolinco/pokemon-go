@@ -45,7 +45,7 @@
                 country: vm.country,
                 number_of_gyms_battled: 0, 
                 date_registered: new Date(),
-                team: null,
+                team: 'NULL',
                 level: 1
             };
 
