@@ -1,0 +1,102 @@
+<div class="ui modal" id="modal-add-user">
+    <div class="header">
+        Add User
+    </div>
+    <div class="image content ui grid" style="background: transparent;">
+        <div class="description eight wide centered column">
+            <table class="ui celled compact table">
+                <thead>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody class="ui mini form" id = "addForm">
+                    <tr>
+                        <td class="bold">Name</td>
+                        <td class="field">
+                            <input type="text" ng-model="main.addu_name">
+                        </td>
+                    </tr>                
+                    <tr>
+                        <td class="bold">Username</td>
+                        <td class="field">
+                            <input type="text" ng-model="main.addu_username">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bold">password</td>
+                        <td class="field">
+                            <input type="password" ng-model="main.addu_password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Sex</td>
+                        <td class="field">
+                            <select class="ui dropdown" ng-model="main.addu_gender">
+                                <option value="">Sex</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Country</td>
+                        <td class="field">
+                            <select class="ui dropdown" ng-model="main.addu_country">
+                                <option value="">Country</option>
+                                <option ng-repeat="country in main.country_list" value="{{country}}">
+                                    <span class="capitalize">{{country}}</span>
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Date Registered</td>
+                        <td class="field">
+                            <input type="date" ng-model="main.addu_dateregistered">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bold">No. Of Gyms Battled</td>
+                        <td class="field">
+                            <input type="number" ng-model="main.addu_numberofgymsbattled ">
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <td class="bold">Team</td>
+                        <td class="field">
+                            <select class="ui dropdown" ng-model="main.addu_team">
+                                <option value="NULL">Null</option>
+                                <option value="Instinct">Instinct</option>
+                                <option value="Valor">Valor</option>
+                                <option value="Mystic">Mystic</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Level</td>
+                        <td class="field">
+                            <input type="number" ng-model="main.addu_level">
+                        </td>
+                    </tr>                 
+                </tbody>
+            </table>
+        </div>
+        <!-- PICTURE HERE
+        <div class="eight wide column middle aligned">
+            <div class="container img-background">
+                <div class="ui image fluid">
+                    <img ng-src="/assets/pokemons/{{main.add_entity}}.png">
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <div class="actions">
+        <div>
+            <div class="ui blue right labeled icon button" ng-click="main.addToDB('user')">Add
+                <i class="add icon"></i></div>
+            <div class="ui black button" ng-click="main.addStop('user')">Cancel</div>
+        </div>
+    </div>
+</div>

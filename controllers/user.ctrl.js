@@ -40,7 +40,7 @@ exports.loginUser = (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
 
-    User.findOneByUsername(username, user => {
+    User.findOne(username, user => {
         if(user && password == crypt.decrypt(user.password)) {
             req.session.username = username;
             return res.status(200).json({ redirect: '/' });

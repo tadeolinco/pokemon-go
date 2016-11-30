@@ -23,6 +23,8 @@
     <div class="ui top attached tabular menu">
         <div ng-repeat="result in main.results" class="pointer item tab-{{result.key}}"  ng-click="main.activateTab(result.key)">
             {{result.field}}
+            <i class="caret down icon" ng-if="main.sorting(result.key)[0] === '-'"></i>
+            <i class="caret up icon" ng-if="main.sorting(result.key)[0] !== '-'"></i>
         </div>
     </div>
     <div class="row" ng-if="main.searching">
@@ -32,7 +34,7 @@
     </div>
     <div class="ui bottom attached tab segment tab-{{result.key}}" ng-repeat="result in main.results">
         <div class="ui grid centered">
-            <div class="three wide column" ng-repeat="unit in result.data | orderBy : result.key track by $index"
+            <div class="three wide column" ng-repeat="unit in result.data | orderBy : main.sorting(result.key) track by $index"
             ng-click="main.openModal(unit)">
                 <div class="ui fluid special card centered pointer">
                     <div class="blurring dimmable image"> 
@@ -76,17 +78,22 @@
 <modal-pokemon></modal-pokemon>
 <modal-user></modal-user>
 <modal-gym></modal-gym>
+<modal-pokemon></modal-pokemon>
+<modal-add-pokemon></modal-add-pokemon>
+<modal-add-user></modal-add-user>
+<modal-add-gym></modal-add-gym>
+
 
 <!-- FAB BUTTONS-->
-    <button id="fab-gym" class="circular huge ui green icon button fab-three" ng-click="main.enableAddButton()">
+    <button id="fab-gym" class="circular huge ui green icon button fab-three" ng-click="main.openAddModal('gym')">
         <i class="building outline icon"></i>
     </button>
 
-    <button id="fab-pokemon" class="circular huge ui blue icon button fab-three" ng-click="main.enableAddButton()">
+    <button id="fab-pokemon" class="circular huge ui blue icon button fab-three" ng-click="main.openAddModal('pokemon')">
         <i class="github alternate icon"></i>
     </button>
 
-    <button id="fab-user" class="circular huge ui red icon button fab-three" ng-click="main.enableAddButton()">
+    <button id="fab-user" class="circular huge ui red icon button fab-three" ng-click="main.openAddModal('user')">
         <i class="user icon"></i>
     </button>
     
@@ -95,7 +102,6 @@
     </button>   
 
 <script>
-
     $('.special.card').on('ready', '.image', function() {
         $(this).dimmer({});
     });
@@ -118,6 +124,4 @@
       })
     ;
 
-
-        
 </script>

@@ -27,6 +27,7 @@
         vm.category = '';
         vm.unit = null;
         vm.searchError = 'Search by...';
+        vm.keys = [];
 
         vm.users = [];        
         vm.gyms = [];
@@ -37,6 +38,7 @@
         vm.snakeToEng = snakeToEng;
         vm.isNone = isNone;
         vm.getImage = getImage;
+        vm.sorting = sorting;
 
         vm.viewUnitStop = viewUnitStop;
         vm.editUnit = editUnit;
@@ -233,6 +235,7 @@
         }
 
         function activateTab(key) {
+            changeSort(key);
             for (let result of vm.results) {
                 if (result.key === key) {
                     $('.tab-'+result.key).addClass('active');
@@ -305,6 +308,7 @@
                                             }
                                         }
                                         if (!found) {
+                                            vm.keys.push(key);
                                             vm.results.push({
                                                 key: key,
                                                 field: field,
@@ -330,6 +334,126 @@
                 });
         }
 
+        /************************************************************
+        ADD FUNCTIONS
+        ************************************************************/
+        vm.country_list = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyz Republic","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","St. Lucia","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia","Turkey","Turkmenistan","Turks &amp; Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","Uruguay","Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
+
+        //pokemon attributes
+        vm.add_name = '';
+        vm.add_entity = '';                
+        vm.add_cp = '';
+        vm.add_type1 = '';
+        vm.add_type2 = '';
+        vm.add_level = '';
+        vm.add_datecaught = '';
+        vm.add_username = '';
+        vm.add_gymid = '';
+
+        //user attributes
+        vm.addu_username  = '';
+        vm.addu_password  = '';
+        vm.addu_name  = '';
+        vm.addu_gender  = '';
+        vm.addu_country  = '';
+        vm.addu_dateregistered  = '';
+        vm.addu_numberofgymsbattled  = '';
+        vm.addu_team  = '';
+        vm.addu_level  = '';
+
+        //gym attributes
+        vm.addg_name = '';
+        vm.addg_country = '';
+        vm.addg_numberofusersbattled = '';
+        vm.addg_team = '';
+        vm.addg_prestige = '';
+
+        vm.openAddModal = openAddModal;
+        vm.addToDB = addToDB;
+        vm.addStop = addStop;
+        
+        function addToDB(param) {
+            if(param === "pokemon") {
+                var pokemon = {
+                    name: vm.add_name, 
+                    entity: vm.add_entity,                 
+                    cp: vm.add_cp,
+                    type1: vm.add_type1,
+                    type2: vm.add_type2,
+                    level: vm.add_level, 
+                    date_caught: vm.add_datecaught,
+                    trainer: vm.add_username,
+                    gym_id: vm.add_gymid
+                };
+             
+                $http
+                    .post('/pokemons', pokemon)
+                    .then(response => { // success
+                        console.log('Successfully added pokemon!');
+                        $('#addForm').form('clear');
+                    }, response => { // error      
+                        console.log('Error in adding pokemon method');
+                    });
+            }else if(param === "user") {
+                var user = {
+                    username: vm.addu_username,
+                    password: vm.addu_password,
+                    name: vm.addu_name,
+                    gender: vm.addu_gender,
+                    country: vm.addu_country,
+                    date_registered: vm.addu_dateregistered,
+                    number_of_gyms_battled: vm.addu_numberofgymsbattled,
+                    team: vm.addu_team,
+                    level: vm.addu_level
+                };
+             
+                $http
+                    .post('/register', user)
+                    .then(response => { // success
+                        console.log('Successfully added user!');
+                        $('#addForm').form('clear');
+                    }, response => { // error      
+                        console.log('Error in adding user method');
+                    });
+            }else if(param === "gym") {
+                var gym = {
+                    name: vm.addg_name,
+                    country: vm.addg_country,
+                    number_of_users_battled: vm.addg_numberofusersbattled,
+                    team: vm.addg_team,
+                    prestige: vm.addg_prestige
+                };
+             
+                $http
+                    .post('/gyms', gym)
+                    .then(response => { // success
+                        console.log('Successfully added gym!');
+                        $('#addForm').form('clear');
+                    }, response => { // error      
+                        console.log('Error in adding gym method');
+                    });
+            }
+
+        }
+
+        function openAddModal(param) {
+            setTimeout(function() {
+                $('#modal-add-' + param)
+                    .modal('setting', {
+                        closable: false,
+                        detachable: false,
+                        observeChanges: true,
+                        duration: 300,
+                    })
+                    .modal('show');
+            }, 1);
+        }
+
+        function addStop(param) {
+            $('#modal-add-' + param).modal('hide');
+            $('#addForm').form('clear');
+        }
+
         function dateToString(date) {
             var string = '';
             string += date.getFullYear() + '-';
@@ -353,6 +477,30 @@
                 string += 'g';
                 string += unit.name.length % 8;
                 return string;
+            }
+        }
+
+        function sorting(sortKey) {
+            for (let key of vm.keys) {
+                if (key.includes(sortKey)) {
+                    return key;
+                }
+            }
+        }
+
+        function changeSort(sortKey) {
+            if ($('.tab-'+sortKey).hasClass('active')) {
+                console.log('sorting changed');
+                for (let i=0; i<vm.keys.length; i++) {
+                    if (vm.keys[i].includes(sortKey)) {
+                        if (vm.keys[i][0] === '-') {
+                            vm.keys[i] = sortKey;
+                        } else {
+                            vm.keys[i] = '-' + sortKey;
+                        }
+                        break;
+                    }
+                }
             }
         }
     }

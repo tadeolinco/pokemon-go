@@ -18,7 +18,7 @@ exports.findOne = (pokemon_id, cb) => {
     
 /* Posts the pokemon, returning its pokemon_id */
 exports.create = (pokemon, cb) => {
-    db.query('INSERT INTO pokemon VALUES(0, :name, :cp, :type1, :type2, :level, :date_caught, :trainer, :gym_id)', pokemon, (err, rows) => {
+    db.query('INSERT INTO pokemon VALUES(0, :entity, :name, :cp, :type1, :type2, :level, :date_caught, :trainer, :gym_id)', pokemon, (err, rows) => {
         if (err) throw err;
         return cb(db.lastInsertId());
     });
