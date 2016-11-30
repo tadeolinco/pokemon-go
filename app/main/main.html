@@ -23,6 +23,8 @@
     <div class="ui top attached tabular menu">
         <div ng-repeat="result in main.results" class="pointer item tab-{{result.key}}"  ng-click="main.activateTab(result.key)">
             {{result.field}}
+            <i class="caret down icon" ng-if="main.sorting(result.key)[0] === '-'"></i>
+            <i class="caret up icon" ng-if="main.sorting(result.key)[0] !== '-'"></i>
         </div>
     </div>
     <div class="row" ng-if="main.searching">
@@ -32,7 +34,7 @@
     </div>
     <div class="ui bottom attached tab segment tab-{{result.key}}" ng-repeat="result in main.results">
         <div class="ui grid centered">
-            <div class="three wide column" ng-repeat="unit in result.data | orderBy : result.key track by $index"
+            <div class="three wide column" ng-repeat="unit in result.data | orderBy : main.sorting(result.key) track by $index"
             ng-click="main.openModal(unit)">
                 <div class="ui fluid special card centered pointer">
                     <div class="blurring dimmable image"> 

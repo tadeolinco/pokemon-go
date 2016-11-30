@@ -27,6 +27,7 @@
         vm.category = '';
         vm.unit = null;
         vm.searchError = 'Search by...';
+        vm.keys = [];
 
         vm.users = [];        
         vm.gyms = [];
@@ -37,6 +38,7 @@
         vm.snakeToEng = snakeToEng;
         vm.isNone = isNone;
         vm.getImage = getImage;
+        vm.sorting = sorting;
 
         vm.viewUnitStop = viewUnitStop;
         vm.editUnit = editUnit;
@@ -200,6 +202,7 @@
         }
 
         function activateTab(key) {
+            changeSort(key);
             for (let result of vm.results) {
                 if (result.key === key) {
                     $('.tab-'+result.key).addClass('active');
@@ -272,6 +275,7 @@
                                             }
                                         }
                                         if (!found) {
+                                            vm.keys.push(key);
                                             vm.results.push({
                                                 key: key,
                                                 field: field,
@@ -320,6 +324,30 @@
                 string += 'g';
                 string += unit.name.length % 8;
                 return string;
+            }
+        }
+
+        function sorting(sortKey) {
+            for (let key of vm.keys) {
+                if (key.includes(sortKey)) {
+                    return key;
+                }
+            }
+        }
+
+        function changeSort(sortKey) {
+            if ($('.tab-'+sortKey).hasClass('active')) {
+                console.log('sorting changed');
+                for (let i=0; i<vm.keys.length; i++) {
+                    if (vm.keys[i].includes(sortKey)) {
+                        if (vm.keys[i][0] === '-') {
+                            vm.keys[i] = sortKey;
+                        } else {
+                            vm.keys[i] = '-' + sortKey;
+                        }
+                        break;
+                    }
+                }
             }
         }
     }
