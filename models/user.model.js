@@ -23,6 +23,14 @@ exports.findOne = (username, cb) => {
         return cb(rows[0]);
     });
 }
+
+exports.findBest = (cb) => {
+    db.query('SELECT trainer, COUNT(DISTINCT entity) as count_pokemon from pokemon group by trainer', (err, rows) => {
+        if (err) throw err;
+        console.log(rows);
+        return cb(rows);
+    });
+}
     
 /* Posts the user, returning its username */
 exports.create = (user, cb) => {

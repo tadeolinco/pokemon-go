@@ -1,0 +1,49 @@
+<div class="ui grid centered">
+    <form class="row ui form" ng-submit="report.generate($event)">
+        <div class="eight wide column">
+            <div class="field">
+                <select class="ui dropdown" ng-model="report.generateCategory" ng-change="report.checkCountryDisabled()">
+                    <option value="">{{report.categoryError}}</option>
+                    <option ng-repeat="option in report.options" 
+                            value="{{option.value}}">
+                            {{option.label}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="five wide column">
+            <div class="field">
+                <select class="ui dropdown" ng-model="report.generateCountry">
+                    <option value="">Country</option>
+                    <option ng-repeat="country in report.country_list" 
+                            value="{{country}}">
+                            {{country}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="three wide column">
+            <button id="search-button" class="ui fluid yellow button" type="submit">Generate</button>
+        </div>
+    </form>
+    <div class="row">
+        <div class="sixteen colum wide">
+            <table class="ui table celled striped">
+                <thead>
+                    <tr>
+                        <th ng-repeat="(key, value) in report.results[0]">{{report.snakeToEng(key)}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="unit in report.results">
+                        <td ng-repeat="(key, value) in unit">{{unit[key]}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.ui.dropdown').dropdown();
+</script>

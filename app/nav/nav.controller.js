@@ -18,7 +18,7 @@
 		vm.logoutUser = logoutUser;
 
 		setTimeout(function() {
-			activateLink('/');
+			activateLink(window.location.hash.slice(1));
 		}, 1);
 
 		function activateLink(link) {

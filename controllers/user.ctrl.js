@@ -17,6 +17,12 @@ exports.getUser = (req, res) => {
     });
 }
 
+exports.getBest = (req, res) => {
+    User.findBest(theBest => {
+        return res.json(theBest);
+    });
+}
+
 exports.getChallenging = (req, res) => {
     var gym_id = req.params.gym_id;
 
