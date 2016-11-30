@@ -13,8 +13,8 @@ require('./modals/gym/modal-gym.directive');
 require('./modals/user/modal-user.directive');
 require('./modals/pokemon/modal-pokemon.directive');
 require('./modals/pokemon/modal-add-pokemon.directive');
-require('./modals/pokemon/modal-add-gym.directive');
-require('./modals/pokemon/modal-add-user.directive');
+require('./modals/gym/modal-add-gym.directive');
+require('./modals/user/modal-add-user.directive');
 
 
 /* CONTROLLERS */

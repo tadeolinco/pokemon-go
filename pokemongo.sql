@@ -21,7 +21,7 @@ CREATE TABLE gym (
     country VARCHAR(20) NOT NULL,
     number_of_users_battled INT NOT NULL,
     team VARCHAR(10),
-    prestige VARCHAR(10) NOT NULL,
+    prestige INT NOT NULL,
     CONSTRAINT gym_gymid_pk PRIMARY KEY(gym_id)
 );
 

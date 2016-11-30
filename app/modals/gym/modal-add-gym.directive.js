@@ -7,7 +7,7 @@
 	function modalAddGym() {
 		var directive = {
 			restrict: 'E',
-			templateUrl: 'app/modals/pokemon/modal-add-gym.html',
+			templateUrl: 'app/modals/gym/modal-add-gym.html',
 		}
 		return directive;
 	}

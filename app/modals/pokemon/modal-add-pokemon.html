@@ -32,7 +32,7 @@
                     <tr>
                         <td class="bold">Cp</td>
                         <td class="field">
-                            <input type="number" ng-model="main.add_cp">
+                            <input type="number" min="1" ng-model="main.add_cp">
                         </td>
                     </tr>
                     <tr>
@@ -61,7 +61,7 @@
                     <tr>
                         <td class="bold">Level</td>
                         <td class="field">
-                            <input type="number" ng-model="main.add_level">
+                            <input type="number" min="1" ng-model="main.add_level">
                         </td>
                     </tr>
                     <tr>
@@ -74,7 +74,6 @@
                         <td class="bold">User Owner</td>
                         <td class="field">
                             <select class="ui dropdown" ng-model="main.add_username">
-                                <option value="">User name</option>
                                 <option ng-repeat="user in main.users" 
                                     value="{{user.username}}">
                                     <span class="capitalize">{{user.username}}</span>
@@ -104,12 +103,37 @@
                 </div>
             </div>
         </div>
+        <div class = "eight wide column">
+          <div class="ui negative mini message" ng-if="main.add_error">
+            <div class="header">Add unsuccessful! Invalid Field/s</div>
+          </div>            
+        </div>
     </div>
     <div class="actions">
         <div>
             <div class="ui blue right labeled icon button" ng-click="main.addToDB('pokemon')">Add
                 <i class="add icon"></i></div>
             <div class="ui black button" ng-click="main.addStop('pokemon')">Cancel</div>
+        </div>
+    </div>
+</div>
+
+<div class="ui basic modal" id="modal-add-confirm">
+    <div class="header">
+        Pokemon Added
+    </div>
+    <div class="image content middle aligned">
+        <div class="image">
+            <i class="checkmark icon"></i>
+        </div>
+        <div class="description">
+            <p>Pokemon Successfully Added!</p>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui green basic inverted button" ng-click="main.addStop('confirm')">
+            <i class="checkmark icon"></i>
+            Confirm
         </div>
     </div>
 </div>

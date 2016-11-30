@@ -2,8 +2,6 @@ $('select.dropdown')
   .dropdown()
 ;
 
-
-
 $('#regForm')
   .form({
     fields: {

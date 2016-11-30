@@ -7,7 +7,7 @@
 	function modalAddUser() {
 		var directive = {
 			restrict: 'E',
-			templateUrl: 'app/modals/pokemon/modal-add-user.html',
+			templateUrl: 'app/modals/user/modal-add-user.html',
 		}
 		return directive;
 	}

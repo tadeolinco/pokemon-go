@@ -45,6 +45,9 @@
 											<i class="right arrow icon"></i>
 										</div>
 									</button>
+									<div class="ui negative mini message" ng-if="login.loginError">
+									  <div class="header">Invalid username/password</div>
+									</div>									
 								</form>
 							</div>
 						</div>
@@ -55,7 +58,7 @@
 								</div>
 							</div>
 							<div class = "content">
-								<form class="ui form" id = "regForm" name = "regForm">
+								<form class="ui form" id = "regForm" name = "regForm" ng-submit = "reg.regUser($event)">
 									<div class="field">
 										<div class="ui left icon mini input">
 											<input type="text" placeholder="Name" name="reg name" ng-model = "reg.name">
@@ -87,7 +90,7 @@
 											<option ng-repeat="country in reg.country_list" value="{{country}}">{{country}}</option>
 										</select>
 									</div>
-									<button class="ui yellow labeled icon button" id = "signUpButton" ng-click = "reg.regUser($event)">
+									<button class="ui yellow labeled icon button" id = "signUpButton">
 										<i class="signup icon"></i>
 							    		Sign Up
 									</button>	
@@ -97,6 +100,9 @@
 									<div class="ui negative mini message" ng-if="reg.error">
 									  <div class="header">Sign up unsuccessful!</div>
 									</div>
+									<div class="ui negative mini message" ng-if="reg.dupError">
+									  <div class="header">Username is taken. Please choose another.</div>
+									</div>									
 								</form>							
 							</div>
 						</div>
