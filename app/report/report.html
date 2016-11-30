@@ -13,7 +13,7 @@
         </div>
         <div class="five wide column">
             <div class="field">
-                <select class="ui dropdown" ng-model="report.generateCountry">
+                <select class="ui dropdown" ng-model="report.generateCountry" id = "countrySelect">
                     <option value="">Country</option>
                     <option ng-repeat="country in report.country_list" 
                             value="{{country}}">
@@ -27,7 +27,7 @@
         </div>
     </form>
     <div class="row">
-        <div class="sixteen colum wide">
+        <div>
             <table class="ui table celled striped">
                 <thead>
                     <tr>
@@ -40,6 +40,13 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div ng-if = "report.no_result">
+            <div class="ui error message">
+              <div class="header">
+                Empty Report
+              </div>
+            </div>
         </div>
     </div>
 </div>
