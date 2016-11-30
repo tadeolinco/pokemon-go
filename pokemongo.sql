@@ -3,8 +3,7 @@ CREATE DATABASE IF NOT EXISTS pokemongo;
 USE pokemongo;
 
 CREATE TABLE user (
-	user_id INT AUTO_INCREMENT,
-    username VARCHAR(10) NOT NULL,
+    username VARCHAR(25) NOT NULL,
     password VARCHAR(72) NOT NULL,
 	name VARCHAR(25) NOT NULL,
     gender VARCHAR(10) NOT NULL,
@@ -13,8 +12,7 @@ CREATE TABLE user (
     number_of_gyms_battled INT NOT NULL,
     team VARCHAR(10),
     level INT NOT NULL,
-    CONSTRAINT user_userid_pk PRIMARY KEY(user_id),
-    CONSTRAINT user_username_uk UNIQUE (username)
+    CONSTRAINT user_username_pk PRIMARY KEY(username)
 );
 
 CREATE TABLE gym (
@@ -24,7 +22,7 @@ CREATE TABLE gym (
     number_of_users_battled INT NOT NULL,
     team VARCHAR(10),
     prestige VARCHAR(10) NOT NULL,
-    CONSTRAINT user_gymid_pk PRIMARY KEY(gym_id)
+    CONSTRAINT gym_gymid_pk PRIMARY KEY(gym_id)
 );
 
 CREATE TABLE pokemon (
@@ -36,17 +34,17 @@ CREATE TABLE pokemon (
     type2 VARCHAR(10),
     level INT NOT NULL,
     date_caught DATE NOT NULL,
-    user_id INT NOT NULL,
+    trainer VARCHAR(25) NOT NULL,
     gym_id INT,
-    CONSTRAINT user_pokemonid_pk PRIMARY KEY(pokemon_id),
-    CONSTRAINT user_userid_fk FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE,
-    CONSTRAINT user_gymid_fk FOREIGN KEY(gym_id) REFERENCES gym(gym_id) ON DELETE SET NULL
+    CONSTRAINT pokemon_pokemonid_pk PRIMARY KEY(pokemon_id),
+    CONSTRAINT pokemon_trainer_fk FOREIGN KEY(trainer) REFERENCES user(username) ON DELETE CASCADE,
+    CONSTRAINT pokemon_gymid_fk FOREIGN KEY(gym_id) REFERENCES gym(gym_id) ON DELETE SET NULL
 );
 
 CREATE TABLE challenges (
-    user_id INT,
+    username VARCHAR(25) NOT NULL,
     gym_id INT,
-    CONSTRAINT user_id_gym_id_pk PRIMARY KEY(user_id, gym_id),
-    CONSTRAINT challenges_userid_fk FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+    CONSTRAINT challenges_username_gymid_pk PRIMARY KEY(username, gym_id),
+    CONSTRAINT challenges_username_fk FOREIGN KEY(username) REFERENCES user(username) ON DELETE CASCADE,
     CONSTRAINT challenges_gymid_fk FOREIGN KEY(gym_id) REFERENCES gym(gym_id) ON DELETE CASCADE
 );

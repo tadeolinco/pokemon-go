@@ -8,9 +8,9 @@ exports.findAll = (cb) => {
     });
 }
 
-/* Returns a challenges tuple specificed by both its user_id and gym_id */
+/* Returns a challenges tuple specificed by both its username and gym_id */
 exports.findOne = (ids, cb) => {
-    db.query('SELECT * FROM challenges WHERE user_id = :user_id AND gym_id = :gym_id', ids, (err, rows) => {
+    db.query('SELECT * FROM challenges WHERE username = :username AND gym_id = :gym_id', ids, (err, rows) => {
         if (err) throw err;
         return cb(rows[0]);
     });
@@ -18,10 +18,10 @@ exports.findOne = (ids, cb) => {
 
 /* Posts the challenge, returning its challenge_id */
 exports.create = (challenge, cb) => {
-    db.query('INSERT INTO challenges VALUES(:user_id, :gym_id)', challenge, (err, rows) => {
+    db.query('INSERT INTO challenges VALUES(:username, :gym_id)', challenge, (err, rows) => {
         if (err) throw err;
         return cb({
-            user_id: challenge.user_id,
+            username: challenge.username,
             gym_id: challenge.gym_id
         });
     });
@@ -29,7 +29,7 @@ exports.create = (challenge, cb) => {
 
 /* Delete one challenge */
 exports.deleteOne = (ids, cb) => {
-    db.query('DELETE FROM challenges WHERE user_id = :user_id AND gym_id = :gym_id', ids, (err, rows) => {
+    db.query('DELETE FROM challenges WHERE username = :username AND gym_id = :gym_id', ids, (err, rows) => {
         if (err) throw err;
         return cb();
     });

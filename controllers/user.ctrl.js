@@ -8,11 +8,11 @@ exports.getUsers = (req, res) => {
     });
 };
 
-/* [GET] USERS BY ID */
+/* [GET] USERS BY USERNAME */
 exports.getUser = (req, res) => {
-    var user_id = req.params.user_id;
+    var username = req.params.username;
 
-    User.findOne(user_id, user => {
+    User.findOne(username, user => {
         return res.json(user);
     });
 }
@@ -30,10 +30,8 @@ exports.registerUser = (req, res) => {
     var user = req.body;
     user.password = crypt.encrypt(user.password);
 
-    User.create(user, user_id => {
-        User.findOne(user_id, newUser => {
-            return res.json(newUser);
-        });
+    User.create(user, newUser => {
+        return res.json(newUser);
     });
 };
 
@@ -61,7 +59,7 @@ exports.logoutUser = (req, res) => {
 /* [PUT] USER */
 exports.updateUser = (req, res) => {
     var user = req.body;
-    user.user_id = req.params.user_id;
+    user.username = req.params.username;
     if (user.password) {
         user.password = crypt.encrypt(user.password);
     }
@@ -73,9 +71,9 @@ exports.updateUser = (req, res) => {
 
 /* [DELETE] USER BY ID */
 exports.deleteUser = (req, res) => {
-    var user_id = req.params.user_id;
+    var username = req.params.username;
 
-    User.delete(user_id, () => {
+    User.delete(username, () => {
         return res.json({});
     });
 }

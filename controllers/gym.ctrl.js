@@ -17,9 +17,9 @@ exports.getGym = (req, res) => {
 }
 
 exports.getChallengedByUser = (req, res) => {
-    var user_id = req.params.user_id;
+    var username = req.params.username;
 
-    Gym.findChallengedByUser(user_id, gyms => {
+    Gym.findChallengedByUser(username, gyms => {
         return res.json(gyms);
     });
 }

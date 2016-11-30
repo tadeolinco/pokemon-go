@@ -8,48 +8,41 @@ exports.findAll = (cb) => {
     });
 }
 
-exports.findOneByUsername = (username, cb) => {
-    db.query('SELECT * FROM user where username = ?', [username], (err, rows) => {
-        if (err) throw err;
-        return cb(rows[0]);
-    });
-}
-
 exports.findChallenging = (gym_id, cb) => {
-    db.query('SELECT user.user_id, name, gender, country, date_registered, number_of_gyms_battled, team, level, username, password FROM user, challenges WHERE challenges.gym_id = ? and challenges.user_id = user.user_id'
+    db.query('SELECT user.username, password, name, gender, country, date_registered, number_of_gyms_battled, team, level FROM user, challenges WHERE challenges.gym_id = ? and challenges.username = user.username'
     , [gym_id], (err, rows) => {
         if (err) throw err;
         return cb(rows);
     });
 }
 
-/* Returns a user tuple specificed by its user_id */
-exports.findOne = (user_id, cb) => {
-    db.query('SELECT * FROM user WHERE user_id = ?', [user_id], (err, rows) => {
+/* Returns a user tuple specificed by its username */
+exports.findOne = (username, cb) => {
+    db.query('SELECT * FROM user where username = ?', [username], (err, rows) => {
         if (err) throw err;
         return cb(rows[0]);
     });
 }
     
-/* Posts the user, returning its user_id */
+/* Posts the user, returning its username */
 exports.create = (user, cb) => {
-    db.query('INSERT INTO user VALUES(0, :username, :password, :name, :gender, :country, :date_registered, :number_of_gyms_battled, :team, :level)', user, (err, rows) => {
-        if (err) throw err;
-        return cb(db.lastInsertId());
-    });
-}
-
-/* Updates user given by user_id */
-exports.update = (user, cb) => {
-    db.query('UPDATE user SET name=:name, gender=:gender, country=:country, date_registered=:date_registered, number_of_gyms_battled=:number_of_gyms_battled, team=:team, level=:level, username=:username, password=:password WHERE user_id=:user_id', user, (err, rows) => {
+    db.query('INSERT INTO user VALUES(:username, :password, :name, :gender, :country, :date_registered, :number_of_gyms_battled, :team, :level)', user, (err, rows) => {
         if (err) throw err;
         return cb(user);
     });
 }
 
-/* Deletes user given by user_id*/
-exports.delete = (user_id, cb) => {
-    db.query('DELETE FROM user WHERE user_id = ?', [user_id], (err, rows) => {
+/* Updates user given by username */
+exports.update = (user, cb) => {
+    db.query('UPDATE user SET password=:password, name=:name, gender=:gender, country=:country, date_registered=str_to_date(:date_registered, "%Y-%m-%d"), number_of_gyms_battled=:number_of_gyms_battled, team=:team, level=:level  WHERE username=:username', user, (err, rows) => {
+        if (err) throw err;
+        return cb(user);
+    });
+}
+
+/* Deletes user given by username*/
+exports.delete = (username, cb) => {
+    db.query('DELETE FROM user WHERE username = ?', [username], (err, rows) => {
         if (err) throw err;
         return cb()
     });

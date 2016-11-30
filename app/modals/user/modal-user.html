@@ -1,6 +1,6 @@
-<div class="ui modal" id="modal-pokemons">
+<div class="ui modal" id="modal-users">
     <div class="header">
-        Pokemon
+        Trainer
     </div>
     <div class="image content ui grid" style="background: transparent;">
         <div class="description eight wide centered column">
@@ -19,20 +19,15 @@
                 </tbody>
                 <tbody ng-if="main.editing" class="ui mini form">
                     <tr>
-                        <td class="bold">Pokemon Id</td>
+                        <td class="bold">Username</td>
                         <td class="disabled field">
-                            <input type="text" ng-model="main.unit.pokemon_id">
+                            <input type="text" ng-model="main.unit.username">
                         </td>
                     </tr>
                     <tr>
-                        <td class="bold">Entity</td>
+                        <td class="bold">Password</td>
                         <td class="field">
-                            <select class="ui dropdown" ng-model="main.unit.entity">
-                                <option ng-repeat="entity in main.entities" 
-                                        value="{{entity}}">
-                                        <span class="capitalize">{{main.snakeToEng(entity)}}</span>
-                                </option>
-                            </select>
+                            <input type="text" ng-model="main.unit.password">
                         </td>
                     </tr>
                     <tr>
@@ -42,31 +37,42 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="bold">Cp</td>
+                        <td class="bold">Gender</td>
                         <td class="field">
-                            <input type="number" ng-model="main.unit.cp">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Type1</td>
-                        <td class="field">
-                            <select class="ui dropdown" ng-model="main.unit.type1">
-                                <option ng-repeat="type in main.types" 
-                                        value="{{type}}">
-                                        <span class="capitalize">{{type}}</span>
-                                </option>
+                            <select class="ui dropdown" ng-model="main.unit.gender">
+                                <option value="Male">Male</option>
+								<option value="Female">Female</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td class="bold">Type2</td>
+                        <td class="bold">Country</td>
                         <td class="field">
-                            <select class="ui dropdown" ng-model="main.unit.type2">
-                                <option value="NULL">None</option>
-                                <option ng-repeat="type in main.types" 
-                                        value="{{type}}">
-                                        <span class="capitalize">{{type}}</span>
-                                </option>
+                            <select class="ui dropdown" ng-model="main.unit.country">
+                                <option ng-repeat="country in main.country_list" value="{{country}}">{{country}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Date Registered</td>
+                        <td class="disabled field">
+                            <input type="date" ng-model="main.unit.date_registered">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Number Of Gyms Battled</td>
+                        <td class="field">
+                            <input type="number" ng-model="main.unit.number_of_gyms_battled">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Team</td>
+                        <td class="field">
+                            <select class="ui dropdown" ng-model="main.unit.team">
+                                <option value="Valor">Valor</option>
+                                <option value="Mystic">Mystic</option>
+                                <option value="Instinct">Instinct</option>
+                                <option value="NULL">NULL</option>
                             </select>
                         </td>
                     </tr>
@@ -76,42 +82,13 @@
                             <input type="number" ng-model="main.unit.level">
                         </td>
                     </tr>
-                    <tr>
-                        <td class="bold">Date Caught</td>
-                        <td class="field">
-                            <input type="date" ng-model="main.unit.date_caught">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Trainer</td>
-                        <td class="field">
-                            <select class="ui dropdown" ng-model="main.unit.trainer">
-                                <option ng-repeat="user in main.users" 
-                                        value="{{user.username}}">
-                                        <span>{{user.username}}</span>
-                                </option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="bold">Gym Id</td>
-                        <td class="field">
-                            <select class="ui dropdown" ng-model="main.unit.gym_id">
-                                <option value="NULL">None</option>
-                                <option ng-repeat="gym in main.gyms" 
-                                        value="{{gym.gym_id}}">
-                                        <span>{{gym.gym_id}}</span>
-                                </option>
-                            </select>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
         <div class="eight wide column middle aligned">
             <div class="container img-background">
                 <div class="ui image fluid">
-                    <img ng-src="/assets/pokemons/{{main.unit.entity}}.png">
+                    <img ng-src="/assets/trainers/{{main.getImage(main.unit)}}.png">
                 </div>
             </div>
         </div>
@@ -133,16 +110,16 @@
     </div>
 </div>
 
-<div class="ui basic modal" id="delete-confirm-pokemons">
+<div class="ui basic modal" id="delete-confirm-users">
     <div class="header">
-        Delete Pokemon
+        Delete User
     </div>
     <div class="image content middle aligned">
         <div class="image">
             <i class="trash icon"></i>
         </div>
         <div class="description">
-            <p>Are you sure you want to delete this pokemon? :(</p>
+            <p>Are you sure you want to delete this user? :(</p>
         </div>
     </div>
     <div class="actions">
