@@ -338,8 +338,6 @@
         vm.openAddModal = openAddModal;
         vm.addToDB = addToDB;
         vm.addStop = addStop;
-        vm.getGyms = getGyms;
-        vm.getUsers = getUsers;
 
         function addToDB(param) {
             if(param === "pokemon") {
