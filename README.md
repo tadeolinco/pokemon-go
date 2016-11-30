@@ -7,3 +7,5 @@
 
 4. `npm start` 
     
+### pokemongo.sql   - DDL statements
+### test.sql        - Seed data
